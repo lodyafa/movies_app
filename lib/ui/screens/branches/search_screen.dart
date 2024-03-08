@@ -54,7 +54,7 @@ class CustomSearchAppBar extends StatelessWidget
       ),
     );
   }
-
+  // good work
   @override
   Size get preferredSize => const Size(double.infinity, 80);
 }
