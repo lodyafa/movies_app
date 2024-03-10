@@ -80,6 +80,7 @@ class SeriesModel extends TMDBModel {
   final String? name;
   final dynamic voteAverage;
   final int? voteCount;
+  final dynamic episodeRunTime;
 
   SeriesModel({
     this.id,
@@ -96,6 +97,7 @@ class SeriesModel extends TMDBModel {
     this.name,
     this.voteAverage,
     this.voteCount,
+    this.episodeRunTime,
   });
 
   factory SeriesModel.fromJson(Map<String, dynamic> json) {
@@ -114,6 +116,7 @@ class SeriesModel extends TMDBModel {
       name: json['name'],
       voteAverage: json['vote_average'],
       voteCount: json['vote_count'],
+      episodeRunTime: json["episode_run_time"],
     );
   }
 }

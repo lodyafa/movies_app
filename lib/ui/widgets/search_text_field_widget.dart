@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/ui/blocs/search_bloc/search_bloc.dart';
 
-class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key, this.iconButton, required this.hintText});
+class SearchTextFieldWidget extends StatelessWidget {
+  const SearchTextFieldWidget({
+    super.key,
+    this.iconButton,
+    required this.hintText,
+  });
 
   final IconButton? iconButton;
   final String hintText;
@@ -9,7 +15,11 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (query) {},
+      onChanged: (query) {
+        context.read<SearchBloc>().add(
+              LoadSearchMediaEvent(query: query),
+            );
+      },
       style: TextStyle(
         color: Theme.of(context).colorScheme.onPrimary,
       ),
@@ -33,5 +43,3 @@ class TextFieldWidget extends StatelessWidget {
     );
   }
 }
-
-

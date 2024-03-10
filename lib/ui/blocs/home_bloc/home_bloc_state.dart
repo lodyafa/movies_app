@@ -6,6 +6,7 @@ class HomeBlocState {
   final List<MovieModel> nowPlayingMovies;
   final List<SeriesModel> popularSeries;
   final List<PersonModel> popularPeople;
+  final bool isLoading;
 
   HomeBlocState({
     this.popularMovies = const [],
@@ -13,6 +14,7 @@ class HomeBlocState {
     this.trendingMovies = const [],
     this.nowPlayingMovies = const [],
     this.popularPeople = const [],
+    this.isLoading = false,
   });
 
   HomeBlocState copyWith({
@@ -21,7 +23,7 @@ class HomeBlocState {
     List<MovieModel>? nowPlayingMovies,
     List<SeriesModel>? popularSeries,
     List<PersonModel>? popularPeople,
-
+    bool? isLoading,
   }) {
     return HomeBlocState(
       popularMovies: popularMovies ?? this.popularMovies,
@@ -29,6 +31,7 @@ class HomeBlocState {
       trendingMovies: trendingMovies ?? this.trendingMovies,
       nowPlayingMovies: nowPlayingMovies ?? this.nowPlayingMovies,
       popularPeople: popularPeople ?? this.popularPeople,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 }

@@ -1,5 +1,3 @@
-
-
 part of "theme.dart";
 
 ThemeData createLightTheme() {
@@ -14,12 +12,12 @@ ThemeData createLightTheme() {
     // ],
     dialogTheme: DialogTheme(
       backgroundColor: AppColors.white,
-      titleTextStyle: headline1.copyWith(
+      titleTextStyle: displayMedium.copyWith(
         color: AppColors.black,
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
-      contentTextStyle: headline1.copyWith(
+      contentTextStyle: displayMedium.copyWith(
         color: AppColors.black,
       ),
     ),

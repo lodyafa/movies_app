@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/data/clients/tmdb_media_client.dart';
 import 'package:movies_app/ui/blocs/search_bloc/search_bloc.dart';
 import 'package:movies_app/ui/widgets/search_body.dart';
-import 'package:movies_app/ui/widgets/text_field_widget.dart';
+import 'package:movies_app/ui/widgets/search_text_field_widget.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -32,13 +32,13 @@ class CustomSearchAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+        padding: const EdgeInsets.all(16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: TextFieldWidget(
+              child: SearchTextFieldWidget(
                 iconButton: IconButton(
                   onPressed: () {},
                   icon: Icon(
