@@ -1,4 +1,4 @@
-abstract class TMDBConfig {
+abstract class ApiConfig {
   static const String baseUrl = "https://api.themoviedb.org/3";
   static const String imageUrl = "https://image.tmdb.org/t/p";
 
@@ -10,4 +10,9 @@ abstract class TMDBConfig {
   static const String popularPersonPath = "/person/popular";
   static const String searchMediaPath = "/search/multi";
 
+  static const String newTokenPath = "/authentication/token/new";
+  static const String validateWithLoginPath =
+      "/authentication/token/validate_with_login";
+  static const String newSessionPath = "/authentication/session/new";
+  static const String accountPath = "/account";
 }

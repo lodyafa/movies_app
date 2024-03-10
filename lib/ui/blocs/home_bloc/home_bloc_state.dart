@@ -23,7 +23,7 @@ class HomeBlocState {
     List<MovieModel>? nowPlayingMovies,
     List<SeriesModel>? popularSeries,
     List<PersonModel>? popularPeople,
-    bool? isLoading,
+    bool? isLoading = false,
   }) {
     return HomeBlocState(
       popularMovies: popularMovies ?? this.popularMovies,

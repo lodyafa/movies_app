@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:movies_app/data/clients/tmdb_media_client.dart';
+import 'package:movies_app/data/api/media_client.dart';
 import 'package:movies_app/models/tmdb_models.dart';
 import 'package:stream_transform/stream_transform.dart';
 
@@ -14,10 +14,10 @@ EventTransformer<E> debounceDroppable<E>(Duration duration) {
 }
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  late final TMDBMediaClient _tmdbMediaClient;
+  late final MediaClient _tmdbMediaClient;
 
   SearchBloc({
-    required TMDBMediaClient tmdbMediaClient,
+    required MediaClient tmdbMediaClient,
   })  : _tmdbMediaClient = tmdbMediaClient,
         super(SearchState()) {
     on<LoadSearchMediaEvent>(

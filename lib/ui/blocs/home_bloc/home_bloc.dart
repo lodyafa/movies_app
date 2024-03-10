@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
 // import 'package:meta/meta.dart';
-import 'package:movies_app/data/clients/tmdb_media_client.dart';
+import 'package:movies_app/data/api/media_client.dart';
 import 'package:movies_app/models/tmdb_models.dart';
 
 part 'home_bloc_event.dart';
 part 'home_bloc_state.dart';
 
 class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
-  late final TMDBMediaClient _tmdbMediaClient;
+  late final MediaClient _tmdbMediaClient;
 
   HomeBloc({
-    required TMDBMediaClient tmdbMediaClient,
+    required MediaClient tmdbMediaClient,
   })  : _tmdbMediaClient = tmdbMediaClient,
         super(HomeBlocState()) {
     on<HomeAllMediaEvent>(_onAllMedia);
@@ -68,6 +68,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       popularSeries: popularSeries,
       popularPeople: popularPeople,
       trendingMovies: trendingMovies,
+      nowPlayingMovies: nowPlayingMovies,
     ));
   }
 

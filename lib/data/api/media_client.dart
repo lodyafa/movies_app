@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movies_app/data/clients/http_client.dart';
-import 'package:movies_app/data/clients/tmdb_config.dart';
+import 'package:movies_app/data/api/api_config.dart';
 import 'package:movies_app/models/tmdb_models.dart';
 
-class TMDBMediaClient {
+class MediaClient {
   static final _httpClient = AppHttpClient();
   static final _apiKey = dotenv.get("API_KEY");
 
@@ -19,7 +19,7 @@ class TMDBMediaClient {
     };
     try {
       final Response? popularMoviesResponse = await _httpClient.get(
-        path: TMDBConfig.popularMoviesPath,
+        path: ApiConfig.popularMoviesPath,
         parameters: parameters,
       );
 
@@ -49,7 +49,7 @@ class TMDBMediaClient {
     };
     try {
       final Response? trendingMoviesResponse = await _httpClient.get(
-        path: TMDBConfig.trendingMoviesPath,
+        path: ApiConfig.trendingMoviesPath,
         parameters: parameters,
       );
 
@@ -80,7 +80,7 @@ class TMDBMediaClient {
     };
     try {
       final Response? nowPlayingMoviesResponse = await _httpClient.get(
-        path: TMDBConfig.nowPlayingMoviesPath,
+        path: ApiConfig.nowPlayingMoviesPath,
         parameters: parameters,
       );
 
@@ -111,7 +111,7 @@ class TMDBMediaClient {
     };
     try {
       final Response? popularSeriesResponse = await _httpClient.get(
-        path: TMDBConfig.popularTVSeriesPath,
+        path: ApiConfig.popularTVSeriesPath,
         parameters: parameters,
       );
 
@@ -141,7 +141,7 @@ class TMDBMediaClient {
     };
     try {
       final Response? popularPeopleResponse = await _httpClient.get(
-        path: TMDBConfig.popularPersonPath,
+        path: ApiConfig.popularPersonPath,
         parameters: parameters,
       );
 
@@ -173,7 +173,7 @@ class TMDBMediaClient {
     };
     try {
       final Response? modelsResponse = await _httpClient.get(
-        path: TMDBConfig.searchMediaPath,
+        path: ApiConfig.searchMediaPath,
         parameters: parameters,
       );
 

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:movies_app/data/clients/tmdb_config.dart';
+import 'package:movies_app/data/api/api_config.dart';
 
 class AppHttpClient {
   static final _dio = Dio();
@@ -8,7 +8,7 @@ class AppHttpClient {
     required String path,
     Map<String, dynamic>? parameters,
   }) {
-    final uri = Uri.parse('${TMDBConfig.baseUrl}$path');
+    final uri = Uri.parse('${ApiConfig.baseUrl}$path');
     if (parameters != null) {
       return uri.replace(queryParameters: parameters);
     } else {

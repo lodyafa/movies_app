@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/data/clients/tmdb_image.dart';
+import 'package:movies_app/data/api/image_formatter.dart';
 import 'package:movies_app/models/tmdb_models.dart';
 import 'package:movies_app/ui/widgets/movie_card_widget.dart';
 import 'package:movies_app/ui/widgets/parameters.dart';
 
 class MoviesListView extends StatelessWidget {
-  const MoviesListView({super.key, required this.movies});
+  const MoviesListView({
+    super.key,
+    required this.movies,
+  });
   final List<MovieModel> movies;
 
   @override
@@ -35,9 +38,12 @@ class MoviesListView extends StatelessWidget {
   }
 }
 
-class PopularSeriesListView extends StatelessWidget {
-  const PopularSeriesListView({super.key, required this.popularSeries});
-  final List<SeriesModel> popularSeries;
+class SeriesListView extends StatelessWidget {
+  const SeriesListView({
+    super.key,
+    required this.series,
+  });
+  final List<SeriesModel> series;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +52,10 @@ class PopularSeriesListView extends StatelessWidget {
       separatorBuilder: (ctx, i) => const SizedBox(width: 15),
       itemBuilder: (ctx, i) {
         return MovieCardWidget(
-          image: popularSeries[i].posterPath != null
+          image: series[i].posterPath != null
               ? Image.network(
                   TMDBImage.formatImageUrl(
-                    path: popularSeries[i].posterPath!,
+                    path: series[i].posterPath!,
                   ),
                   fit: BoxFit.cover,
                 )
@@ -58,17 +64,20 @@ class PopularSeriesListView extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
           width: 140,
-          title: popularSeries[i].name ?? "None",
+          title: series[i].name ?? "None",
         );
       },
-      itemCount: popularSeries.length,
+      itemCount: series.length,
     );
   }
 }
 
-class PopularPeopleListView extends StatelessWidget {
-  const PopularPeopleListView({super.key, required this.popularPeople});
-  final List<PersonModel> popularPeople;
+class PersonListView extends StatelessWidget {
+  const PersonListView({
+    super.key,
+    required this.persons,
+  });
+  final List<PersonModel> persons;
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +86,10 @@ class PopularPeopleListView extends StatelessWidget {
       separatorBuilder: (ctx, i) => const SizedBox(width: 15),
       itemBuilder: (ctx, i) {
         return MovieCardWidget(
-          image: popularPeople[i].profilePath != null
+          image: persons[i].profilePath != null
               ? Image.network(
                   TMDBImage.formatImageUrl(
-                    path: popularPeople[i].profilePath!,
+                    path: persons[i].profilePath!,
                   ),
                   fit: BoxFit.cover,
                 )
@@ -89,10 +98,10 @@ class PopularPeopleListView extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
           width: 140,
-          title: popularPeople[i].name ?? "None",
+          title: persons[i].name ?? "None",
         );
       },
-      itemCount: popularPeople.length,
+      itemCount: persons.length,
     );
   }
 }
@@ -282,6 +291,7 @@ class SearchMediaList extends StatelessWidget {
             },
           );
         }
+        return null;
       },
       separatorBuilder: (context, i) => const SizedBox(
         height: 1,
@@ -290,6 +300,3 @@ class SearchMediaList extends StatelessWidget {
     );
   }
 }
-
-
-
