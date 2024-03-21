@@ -5,17 +5,18 @@ class Parameters extends StatelessWidget {
     super.key,
     required this.voteAverage,
     required this.releaseDate,
-    required this.time,
+    required this.origTitle,
   });
 
   final String voteAverage;
   final String releaseDate;
-  final String time;
+  final String origTitle;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Characteristics(
           icon: Icons.star_rate,
@@ -30,8 +31,8 @@ class Parameters extends StatelessWidget {
           textColor: Theme.of(context).colorScheme.onPrimary,
         ),
         Characteristics(
-          icon: Icons.access_time,
-          text: time,
+          icon: Icons.info_outline,
+          text: origTitle,
           iconColor: Theme.of(context).colorScheme.onPrimary,
           textColor: Theme.of(context).colorScheme.onPrimary,
         ),
@@ -66,11 +67,14 @@ class Characteristics extends StatelessWidget {
         const SizedBox(
           width: 5,
         ),
-        Text(
-          text,
-          style: TextStyle(
-            color: textColor,
-            overflow: TextOverflow.ellipsis,
+        Expanded(
+          child: Text(
+            text,
+            maxLines: 1,
+            style: TextStyle(
+              color: textColor,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ],

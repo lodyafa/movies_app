@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({super.key, this.iconButton, required this.hintText});
+  const TextFieldWidget({
+    super.key,
+    this.iconButton,
+    required this.hintText,
+    required this.controller,
+  });
 
+  final TextEditingController controller;
   final IconButton? iconButton;
   final String hintText;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       onChanged: (query) {},
       style: TextStyle(
         color: Theme.of(context).colorScheme.onPrimary,
@@ -33,5 +40,3 @@ class TextFieldWidget extends StatelessWidget {
     );
   }
 }
-
-

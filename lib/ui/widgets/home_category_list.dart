@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/models/tmdb_models.dart';
+// import 'package:go_router/go_router.dart';
+import 'package:movies_app/domain/models/tmdb_models.dart';
 import 'package:movies_app/ui/widgets/custom_lists.dart';
 
 class HomeCategoryList<T> extends StatelessWidget {
@@ -33,13 +34,24 @@ class HomeCategoryList<T> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                // context.go("/all_movies");
+              },
+              child: const Text("All"),
+            ),
+          ],
         ),
         SizedBox(
           height: 256,

@@ -1,14 +1,24 @@
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
+import 'package:movies_app/ui/screens/authorization_screen.dart';
 import 'package:movies_app/ui/screens/branches/home_screen.dart';
 import 'package:movies_app/ui/screens/branches/root_screen.dart';
 import 'package:movies_app/ui/screens/branches/search_screen.dart';
 import 'package:movies_app/ui/screens/branches/watch_list_screen.dart';
+import 'package:movies_app/ui/screens/screen_loader.dart';
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    initialLocation: AppRoutes.home,
+    initialLocation: AppRoutes.screenLoader,
     routes: [
+      GoRoute(
+        path: AppRoutes.screenLoader,
+        builder: (context, state) => const ScreenLoader(),
+      ),
+      GoRoute(
+        path: AppRoutes.auth,
+        builder: (context, state) => const AuthorizationScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             RootScreen(navigationShell: navigationShell),
@@ -18,6 +28,15 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.home,
                 builder: (context, state) => const HomeScreen(),
+                // routes: [
+                //   GoRoute(path: "${AppRoutes.home}/mediaDetails",
+                //   builder: (context, state) {
+                //     // return
+                //   },
+                
+                //   ),
+                  
+                // ]
               ),
             ],
           ),
@@ -39,6 +58,7 @@ class AppRouter {
           ),
         ],
       ),
+    
     ],
   );
 

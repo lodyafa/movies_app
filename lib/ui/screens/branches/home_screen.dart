@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/data/api/media_client.dart';
+import 'package:movies_app/data/api/clients/media_client.dart';
 import 'package:movies_app/ui/blocs/home_bloc/home_bloc.dart';
 import 'package:movies_app/ui/widgets/home_body.dart';
 

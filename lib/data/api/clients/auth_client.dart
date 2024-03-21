@@ -33,9 +33,7 @@ class AuthClient {
       path: ApiConfig.newTokenPath,
       parameters: parameters,
     );
-    if (tokenResponse == null) {
-      throw (Exception("No token response"));
-    }
+
     final String token = tokenResponse.data["request_token"] as String;
     return token;
   }
@@ -57,10 +55,6 @@ class AuthClient {
       parameters: parameters,
     );
 
-    if (validateResponse == null) {
-      throw (Exception("No validation response"));
-    }
-
     final String validToken = validateResponse.data["request_token"] as String;
     return validToken;
   }
@@ -77,10 +71,6 @@ class AuthClient {
       path: ApiConfig.newSessionPath,
       parameters: parameters,
     );
-
-    if (sessionResponse == null) {
-      throw (Exception("No session response"));
-    }
 
     final String sessionId = sessionResponse.data["session_id"] as String;
     return sessionId;

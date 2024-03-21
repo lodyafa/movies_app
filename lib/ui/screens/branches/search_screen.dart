@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/data/api/media_client.dart';
+import 'package:movies_app/data/api/clients/media_client.dart';
 import 'package:movies_app/ui/blocs/search_bloc/search_bloc.dart';
 import 'package:movies_app/ui/widgets/search_body.dart';
 import 'package:movies_app/ui/widgets/search_text_field_widget.dart';
@@ -42,7 +42,7 @@ class CustomSearchAppBar extends StatelessWidget
                 iconButton: IconButton(
                   onPressed: () {},
                   icon: Icon(
-                    Icons.search,
+                    Icons.tune,
                     color: Theme.of(context).colorScheme.onSecondary,
                   ),
                 ),
@@ -55,7 +55,6 @@ class CustomSearchAppBar extends StatelessWidget
     );
   }
 
-  // good work
   @override
   Size get preferredSize => const Size(double.infinity, 80);
 }

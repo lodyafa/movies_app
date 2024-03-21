@@ -16,11 +16,7 @@ class AccountClient {
       path: ApiConfig.accountPath,
       parameters: parameters,
     );
-
-    if (response == null) {
-      throw Exception("No response from getAccountId");
-    }
-    
+      
     return response.data["id"] as int;
   }
 }

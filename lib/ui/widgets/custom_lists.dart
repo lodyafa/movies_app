@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/image_formatter.dart';
-import 'package:movies_app/models/tmdb_models.dart';
+import 'package:movies_app/domain/models/tmdb_models.dart';
 import 'package:movies_app/ui/widgets/movie_card_widget.dart';
-import 'package:movies_app/ui/widgets/parameters.dart';
+import 'package:movies_app/ui/widgets/movie_parameters.dart';
 
 class MoviesListView extends StatelessWidget {
   const MoviesListView({
@@ -17,20 +18,25 @@ class MoviesListView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       separatorBuilder: (ctx, i) => const SizedBox(width: 15),
       itemBuilder: (ctx, i) {
-        return MovieCardWidget(
-          image: movies[i].posterPath != null
-              ? Image.network(
-                  TMDBImage.formatImageUrl(
-                    path: movies[i].posterPath!,
+        return GestureDetector(
+          onTap: () {
+            context.go("/movie_details");
+          },
+          child: MovieCardWidget(
+            image: movies[i].posterPath != null
+                ? Image.network(
+                    ApiImageFormatter.formatImageUrl(
+                      path: movies[i].posterPath!,
+                    ),
+                    fit: BoxFit.cover,
+                  )
+                : Image.network(
+                    "https://ir.ozone.ru/s3/multimedia-g/c1000/6579294784.jpg",
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
-                )
-              : Image.network(
-                  "https://ir.ozone.ru/s3/multimedia-g/c1000/6579294784.jpg",
-                  fit: BoxFit.cover,
-                ),
-          width: 140,
-          title: movies[i].title ?? "None",
+            width: 140,
+            title: movies[i].title ?? "None",
+          ),
         );
       },
       itemCount: movies.length,
@@ -54,7 +60,7 @@ class SeriesListView extends StatelessWidget {
         return MovieCardWidget(
           image: series[i].posterPath != null
               ? Image.network(
-                  TMDBImage.formatImageUrl(
+                  ApiImageFormatter.formatImageUrl(
                     path: series[i].posterPath!,
                   ),
                   fit: BoxFit.cover,
@@ -88,7 +94,7 @@ class PersonListView extends StatelessWidget {
         return MovieCardWidget(
           image: persons[i].profilePath != null
               ? Image.network(
-                  TMDBImage.formatImageUrl(
+                  ApiImageFormatter.formatImageUrl(
                     path: persons[i].profilePath!,
                   ),
                   fit: BoxFit.cover,
@@ -132,7 +138,7 @@ class SearchMediaList extends StatelessWidget {
                     height: 150,
                     child: mediaModel.posterPath != null
                         ? Image.network(
-                            TMDBImage.formatImageUrl(
+                            ApiImageFormatter.formatImageUrl(
                               path: mediaModel.posterPath!,
                             ),
                             height: 256,
@@ -160,22 +166,10 @@ class SearchMediaList extends StatelessWidget {
                       const SizedBox(
                         height: 45,
                       ),
-                      // Characteristics(
-                      //   icon: Icons.star_rate,
-                      //   text: mediaModel.voteAverage.toStringAsFixed(1),
-                      // ),
-                      // Characteristics(
-                      //   icon: Icons.calendar_month,
-                      //   text: mediaModel.releaseDate ?? "none",
-                      // ),
-                      // Characteristics(
-                      //   icon: Icons.access_time,
-                      //   text: mediaModel.runtime.toString(),
-                      // ),
                       Parameters(
                         voteAverage: mediaModel.voteAverage.toStringAsFixed(1),
                         releaseDate: mediaModel.releaseDate ?? "none",
-                        time: mediaModel.runtime.toString(),
+                        origTitle: mediaModel.originalTitle.toString(),
                       ),
                     ],
                   ),
@@ -200,7 +194,7 @@ class SearchMediaList extends StatelessWidget {
                     height: 150,
                     child: mediaModel.posterPath != null
                         ? Image.network(
-                            TMDBImage.formatImageUrl(
+                            ApiImageFormatter.formatImageUrl(
                               path: mediaModel.posterPath!,
                             ),
                             height: 256,
@@ -230,7 +224,7 @@ class SearchMediaList extends StatelessWidget {
                       Parameters(
                         voteAverage: mediaModel.voteAverage.toStringAsFixed(1),
                         releaseDate: mediaModel.firstAirDate ?? "none",
-                        time: mediaModel.episodeRunTime.toString(),
+                        origTitle: mediaModel.originalName.toString(),
                       ),
                     ],
                   ),
@@ -255,7 +249,7 @@ class SearchMediaList extends StatelessWidget {
                     height: 150,
                     child: mediaModel.profilePath != null
                         ? Image.network(
-                            TMDBImage.formatImageUrl(
+                            ApiImageFormatter.formatImageUrl(
                               path: mediaModel.profilePath!,
                             ),
                             width: 140,

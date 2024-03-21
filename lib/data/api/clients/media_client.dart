@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movies_app/data/clients/http_client.dart';
 import 'package:movies_app/data/api/api_config.dart';
-import 'package:movies_app/models/tmdb_models.dart';
+import 'package:movies_app/domain/models/tmdb_models.dart';
 
 class MediaClient {
   static final _httpClient = AppHttpClient();
@@ -18,14 +18,10 @@ class MediaClient {
       "api_key": _apiKey,
     };
     try {
-      final Response? popularMoviesResponse = await _httpClient.get(
+      final Response popularMoviesResponse = await _httpClient.get(
         path: ApiConfig.popularMoviesPath,
         parameters: parameters,
       );
-
-      if (popularMoviesResponse == null || popularMoviesResponse.data == null) {
-        return const [];
-      }
 
       final List<MovieModel> popularMovies =
           (popularMoviesResponse.data["results"] as List)
@@ -48,15 +44,10 @@ class MediaClient {
       "api_key": _apiKey,
     };
     try {
-      final Response? trendingMoviesResponse = await _httpClient.get(
+      final Response trendingMoviesResponse = await _httpClient.get(
         path: ApiConfig.trendingMoviesPath,
         parameters: parameters,
       );
-
-      if (trendingMoviesResponse == null ||
-          trendingMoviesResponse.data == null) {
-        return const [];
-      }
 
       final List<MovieModel> trendingMovies =
           (trendingMoviesResponse.data["results"] as List)
@@ -79,15 +70,10 @@ class MediaClient {
       "api_key": _apiKey,
     };
     try {
-      final Response? nowPlayingMoviesResponse = await _httpClient.get(
+      final Response nowPlayingMoviesResponse = await _httpClient.get(
         path: ApiConfig.nowPlayingMoviesPath,
         parameters: parameters,
       );
-
-      if (nowPlayingMoviesResponse == null ||
-          nowPlayingMoviesResponse.data == null) {
-        return const [];
-      }
 
       final List<MovieModel> nowPlayingMovies =
           (nowPlayingMoviesResponse.data["results"] as List)
@@ -110,14 +96,10 @@ class MediaClient {
       "api_key": _apiKey,
     };
     try {
-      final Response? popularSeriesResponse = await _httpClient.get(
+      final Response popularSeriesResponse = await _httpClient.get(
         path: ApiConfig.popularTVSeriesPath,
         parameters: parameters,
       );
-
-      if (popularSeriesResponse == null || popularSeriesResponse.data == null) {
-        return const [];
-      }
 
       final List<SeriesModel> popularSeries =
           (popularSeriesResponse.data["results"] as List)
@@ -140,14 +122,10 @@ class MediaClient {
       "api_key": _apiKey,
     };
     try {
-      final Response? popularPeopleResponse = await _httpClient.get(
+      final Response popularPeopleResponse = await _httpClient.get(
         path: ApiConfig.popularPersonPath,
         parameters: parameters,
       );
-
-      if (popularPeopleResponse == null || popularPeopleResponse.data == null) {
-        return const [];
-      }
 
       final List<PersonModel> popularPeople =
           (popularPeopleResponse.data["results"] as List)
@@ -172,14 +150,10 @@ class MediaClient {
       "api_key": _apiKey,
     };
     try {
-      final Response? modelsResponse = await _httpClient.get(
+      final Response modelsResponse = await _httpClient.get(
         path: ApiConfig.searchMediaPath,
         parameters: parameters,
       );
-
-      if (modelsResponse == null || modelsResponse.data == null) {
-        return const [];
-      }
 
       final List<TMDBModel> models =
           (modelsResponse.data["results"] as List).map((json) {

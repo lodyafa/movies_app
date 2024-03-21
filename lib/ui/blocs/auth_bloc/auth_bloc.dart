@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:movies_app/data/api/account_client.dart';
-import 'package:movies_app/data/api/auth_client.dart';
-import 'package:movies_app/data/api/session_data_client.dart';
+import 'package:movies_app/data/api/clients/account_client.dart';
+import 'package:movies_app/data/api/clients/auth_client.dart';
+import 'package:movies_app/data/api/clients/session_data_client.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
