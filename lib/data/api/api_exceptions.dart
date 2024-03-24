@@ -1,3 +1,4 @@
+
 enum ApiExceptionType { network, auth, sessionExpired, unknown }
 
 class ApiException {

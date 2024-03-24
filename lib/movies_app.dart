@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:movies_app/data/api/clients/account_client.dart';
-import 'package:movies_app/data/api/clients/auth_client.dart';
-import 'package:movies_app/data/api/clients/session_data_client.dart';
+import 'package:movies_app/data/api/api_clients/account_client.dart';
+import 'package:movies_app/data/api/api_clients/auth_client.dart';
+import 'package:movies_app/data/api/api_clients/session_data_client.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
 import 'package:movies_app/ui/routes/app_router.dart';
 import 'package:movies_app/ui/themes/theme.dart';

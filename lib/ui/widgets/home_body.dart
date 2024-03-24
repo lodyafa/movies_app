@@ -29,30 +29,40 @@ class HomeBody extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16),
           children: [
             HomeCategoryList<MovieModel>(
+              cardHeight: 210,
+              cardWidth: 140,
               title: "Popular Movies",
               media: state.popularMovies,
             ),
             const SizedBox(height: 10),
             HomeCategoryList<MovieModel>(
+cardHeight: 210,
+              cardWidth: 140,
               title: "Trending Movies",
               media: state.trendingMovies,
             ),
             const SizedBox(height: 10),
-            HomeCategoryList<SeriesModel>(
-              title: "Popular TV Series",
-              media: state.popularSeries,
-            ),
-            const SizedBox(height: 10),
-            HomeCategoryList<MovieModel>(
-              title: "Now playing",
-              media: state.nowPlayingMovies,
-            ),
-            const SizedBox(height: 10),
-            HomeCategoryList<PersonModel>(
-              title: "Popular people",
-              media: state.popularPeople,
-            ),
-            const SizedBox(height: 10),
+            // HomeCategoryList<SeriesModel>(
+            //   cardHeight: 180,
+            //   cardWidth: 120,
+            //   title: "Popular TV Series",
+            //   media: state.popularSeries,
+            // ),
+            // const SizedBox(height: 10),
+            // HomeCategoryList<MovieModel>(
+            //   cardHeight: 180,
+            //   cardWidth: 120,
+            //   title: "Now playing",
+            //   media: state.nowPlayingMovies,
+            // ),
+            // const SizedBox(height: 10),
+            // HomeCategoryList<PersonModel>(
+            //   cardHeight: 180,
+            //   cardWidth: 120,
+            //   title: "Popular people",
+            //   media: state.popularPeople,
+            // ),
+            // const SizedBox(height: 10),
           ],
         );
       },

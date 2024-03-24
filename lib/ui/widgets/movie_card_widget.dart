@@ -8,7 +8,7 @@ class MovieCardWidget extends StatelessWidget {
     required this.title,
   });
 
-  final Image image;
+  final Widget image;
   final double width;
   final String title;
 
@@ -17,12 +17,9 @@ class MovieCardWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: SizedBox(
-            width: width,
-            child: image,
-          ),
+        SizedBox(
+          width: width,
+          child: image,
         ),
         const SizedBox(
           height: 5,

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:movies_app/data/api/clients/media_client.dart';
+import 'package:movies_app/data/api/api_clients/media_client.dart';
 import 'package:movies_app/domain/models/tmdb_models.dart';
 import 'package:stream_transform/stream_transform.dart';
 

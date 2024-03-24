@@ -15,4 +15,8 @@ abstract class ApiConfig {
       "/authentication/token/validate_with_login";
   static const String newSessionPath = "/authentication/session/new";
   static const String accountPath = "/account";
+  
+  static const String moviePath = "/movie";
+  static const String seriesPath = "/tv";
+  static const String personPath = "/person";
 }

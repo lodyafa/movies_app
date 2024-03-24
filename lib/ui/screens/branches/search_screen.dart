@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/data/api/clients/media_client.dart';
+import 'package:movies_app/data/api/api_clients/media_client.dart';
 import 'package:movies_app/ui/blocs/search_bloc/search_bloc.dart';
 import 'package:movies_app/ui/widgets/search_body.dart';
 import 'package:movies_app/ui/widgets/search_text_field_widget.dart';

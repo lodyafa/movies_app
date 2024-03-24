@@ -7,20 +7,22 @@ import 'package:movies_app/data/api/api_config.dart';
 class AuthClient {
   static final _httpClient = AppHttpClient();
   static final _apiKey = dotenv.get("API_KEY");
-  
+
   Future<String> auth({
     required String login,
     required String password,
   }) async {
     final String requestToken = await _getToken();
+
     final String validatedToken = await _validateUser(
       login: login,
       password: password,
       requestToken: requestToken,
     );
-    final String sessionId = await _getSessionId(
-      validatedToken: validatedToken,
-    );
+
+    final String sessionId =
+        await _getSessionId(validatedToken: validatedToken);
+
     return sessionId;
   }
 

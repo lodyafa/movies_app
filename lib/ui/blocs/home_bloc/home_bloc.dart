@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 // import 'package:meta/meta.dart';
-import 'package:movies_app/data/api/clients/media_client.dart';
+import 'package:movies_app/data/api/api_clients/media_client.dart';
 import 'package:movies_app/domain/models/tmdb_models.dart';
 
 part 'home_bloc_event.dart';

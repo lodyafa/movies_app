@@ -8,10 +8,14 @@ class HomeCategoryList<T> extends StatelessWidget {
     super.key,
     required this.title,
     required this.media,
+    required this.cardWidth,
+    required this.cardHeight,
   });
 
   final String title;
   final List<T> media;
+  final double cardWidth;
+  final double cardHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +23,8 @@ class HomeCategoryList<T> extends StatelessWidget {
 
     if (T == MovieModel) {
       mediaList = MoviesListView(
+        cardHeight: cardHeight,
+        cardWidth: cardWidth,
         movies: media.cast<MovieModel>(),
       );
     } else if (T == SeriesModel) {

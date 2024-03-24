@@ -1,79 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/data/api/api_exceptions.dart';
+import 'package:movies_app/domain/models/tmdb_models.dart';
+import 'package:movies_app/ui/blocs/movie_details_bloc/movie_details_bloc.dart';
+import 'package:movies_app/ui/utils/image_formatter.dart';
+import 'package:movies_app/ui/widgets/error_widget.dart';
+import 'package:movies_app/ui/widgets/movie_details_title.dart';
+import 'package:movies_app/ui/widgets/movie_extra_info.dart';
 
 class MovieDetailsBody extends StatelessWidget {
   const MovieDetailsBody({
     super.key,
+    required this.movieId,
   });
 
-  // final MovieModel movie;
+  final int movieId;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+      builder: (context, state) {
+        if (state is MovieDetailsFailureState) {
+          switch (state.failure.type) {
+            case (ApiExceptionType.network):
+              return CustomErrorWidget(
+                text: "Check your internet connection",
+                icon: Icons.wifi_off,
+                btnText: "Update",
+                onPressed: () => context
+                    .read<MovieDetailsBloc>()
+                    .add(MovieDetailsLoadDetailsEvent(
+                      movieId: movieId,
+                    )),
+              );
+            default:
+              return CustomErrorWidget(
+                text: "Something wrong...",
+                icon: Icons.error,
+                btnText: "Update",
+                onPressed: () {},
+              );
+          }
+        }
+
+        if (state is MovieDetailsLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state is MovieDetailsLoadedState) {
+          return MovieDetailsLoadedBody(
+            movie: state.movieDetails,
+            movieActors: state.movieActors,
+          );
+        }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+  }
+}
+
+class MovieDetailsLoadedBody extends StatelessWidget {
+  const MovieDetailsLoadedBody({
+    super.key,
+    required this.movie,
+    required this.movieActors,
+  });
+
+  final MovieModel movie;
+  final List<PersonModel> movieActors;
 
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.all(0),
       children: [
-        SizedBox(
-          width: double.infinity,
-          height: 250,
-          child: Image.network(
-            // movie.posterPath ??
-            // "https://photogora.ru/img/product/thumb/10524/15432413120.jpg",
-            "https://avatars.mds.yandex.net/get-kinopoisk-post-img/1362954/1c3453100d0137063da650cc54479d85/960",
-            fit: BoxFit.cover,
-          ),
-        ),
-        const SizedBox(height: 15),
-        const Text(
-          // movie.title ??
-          "Spiderman far from home",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 15),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Stack(
           children: [
-            Icon(Icons.date_range),
-            SizedBox(width: 5),
-            Text(
-                // movie.releaseDate ??
-                "2021"),
-            SizedBox(width: 16),
-            Text("|"),
-            SizedBox(width: 16),
-            Icon(Icons.access_time_rounded),
-            SizedBox(width: 5),
-            Text("148 min"),
-            SizedBox(width: 16),
-            Text("|"),
-            SizedBox(width: 16),
-            Icon(Icons.perm_device_info),
-            SizedBox(width: 5),
-            Text("Action"),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: () {},
-              child: Text("About Movie"),
+            Column(
+              children: [
+                ImageFormatter.formatImageWidget(
+                  context,
+                  imagePath: movie.backdropPath,
+                  height: 250,
+                  width: double.infinity,
+                ),
+                Container(
+                  width: double.infinity,
+                  color: Theme.of(context).colorScheme.background,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 170, right: 25),
+                    child: MovieDetailsTitle(
+                      movieTitle: movie.title,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(width: 10),
-            TextButton(
-              onPressed: () {},
-              child: Text("Cast"),
-            ),
-            SizedBox(width: 10),
-            TextButton(
-              onPressed: () {},
-              child: Text("Reviews"),
+            Positioned(
+              top: 150,
+              left: 30,
+              child: ImageFormatter.formatImageWidget(context,
+                  imagePath: movie.posterPath, height: 180, width: 120),
             ),
           ],
         ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: MovieExtraInfo(
+            releaseDate: movie.releaseDate,
+            runtime: movie.runtime,
+            productionCountries: movie.productionCountries ?? [],
+            genres: movie.genres ?? [],
+          ),
+        )
       ],
     );
   }

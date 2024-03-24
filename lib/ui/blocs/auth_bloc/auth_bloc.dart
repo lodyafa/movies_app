@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:movies_app/data/api/clients/account_client.dart';
-import 'package:movies_app/data/api/clients/auth_client.dart';
-import 'package:movies_app/data/api/clients/session_data_client.dart';
+import 'package:movies_app/data/api/api_clients/account_client.dart';
+import 'package:movies_app/data/api/api_clients/auth_client.dart';
+import 'package:movies_app/data/api/api_clients/session_data_client.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -24,6 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       _eventHandlerSwitcher,
       transformer: sequential(),
     );
+    // add(AuthLogoutEvent());
   }
 
   Future<void> _eventHandlerSwitcher(
@@ -70,8 +71,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onAuthLogout(
       AuthLogoutEvent event, Emitter<AuthState> emit) async {
     try {
-      await _sessionDataClient.deleteAccountId();
       await _sessionDataClient.deleteSessionId();
+      await _sessionDataClient.deleteAccountId();
     } catch (err) {
       emit(AuthFailureState(err));
     }

@@ -6,7 +6,10 @@ abstract class AppRoutes {
   static const String search = "/search";
   static const String watchList = "/watchList";
   static const String profile = "/profile";
-  static const String details = "/details";
   static const String allMovies = "/all_movies";
-  static const String movieDetails = "/movie_details";
+
+
+
+  static const String movieDetails = "movie_details";
+  static const String personDetails = "person_details";
 }
