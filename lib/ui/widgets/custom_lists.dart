@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:movies_app/domain/models/tmdb_models.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
 import 'package:movies_app/ui/utils/image_formatter.dart';
-import 'package:movies_app/ui/widgets/movie_card_widget.dart';
-import 'package:movies_app/ui/widgets/movie_parameters.dart';
+import 'package:movies_app/ui/widgets/media_card_widget.dart';
+import 'package:movies_app/ui/widgets/media_parameters.dart';
 
 class MoviesListView extends StatelessWidget {
   const MoviesListView({
@@ -25,17 +25,18 @@ class MoviesListView extends StatelessWidget {
       itemBuilder: (ctx, i) {
         return GestureDetector(
           onTap: () {
-            // final currentRoute =
-            //     GoRouter.of(context).routeInformationProvider.value.uri;
-
-            context.go("${AppRoutes.home}/${AppRoutes.movieDetails}",
-                extra: [movies[i].id, movies[i].title]);
+            context.go(
+              "${AppRoutes.home}/${AppRoutes.movieDetails}",
+              extra: [movies[i].id, movies[i].title],
+            );
           },
-          child: MovieCardWidget(
-            image: ImageFormatter.formatImageWidget(context,
-                imagePath: movies[i].posterPath,
-                height: cardHeight,
-                width: cardWidth),
+          child: MediaCardWidget(
+            image: ImageFormatter.formatImageWidget(
+              context,
+              imagePath: movies[i].posterPath,
+              height: cardHeight,
+              width: cardWidth,
+            ),
             width: cardWidth,
             title: movies[i].title ?? "None",
           ),
@@ -50,8 +51,12 @@ class SeriesListView extends StatelessWidget {
   const SeriesListView({
     super.key,
     required this.series,
+    required this.cardWidth,
+    required this.cardHeight,
   });
   final List<SeriesModel> series;
+  final double cardWidth;
+  final double cardHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +64,23 @@ class SeriesListView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       separatorBuilder: (ctx, i) => const SizedBox(width: 15),
       itemBuilder: (ctx, i) {
-        return MovieCardWidget(
-          image: ImageFormatter.formatImageWidget(context,
+        return GestureDetector(
+          onTap: () {
+            context.go(
+              "${AppRoutes.home}/${AppRoutes.seriesDetails}",
+              extra: [series[i].id, series[i].name],
+            );
+          },
+          child: MediaCardWidget(
+            image: ImageFormatter.formatImageWidget(
+              context,
               imagePath: series[i].posterPath,
-              height: double.infinity,
-              width: 140),
-          width: 140,
-          title: series[i].name ?? "None",
+              height: cardHeight,
+              width: cardWidth,
+            ),
+            width: cardWidth,
+            title: series[i].name ?? "None",
+          ),
         );
       },
       itemCount: series.length,
@@ -77,8 +92,12 @@ class PersonListView extends StatelessWidget {
   const PersonListView({
     super.key,
     required this.persons,
+    required this.cardWidth,
+    required this.cardHeight,
   });
   final List<PersonModel> persons;
+  final double cardWidth;
+  final double cardHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +105,14 @@ class PersonListView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       separatorBuilder: (ctx, i) => const SizedBox(width: 15),
       itemBuilder: (ctx, i) {
-        return MovieCardWidget(
-          image: ImageFormatter.formatImageWidget(context,
-              imagePath: persons[i].profilePath,
-              height: double.infinity,
-              width: 140),
-          width: 140,
+        return MediaCardWidget(
+          image: ImageFormatter.formatImageWidget(
+            context,
+            imagePath: persons[i].profilePath,
+            height: cardHeight,
+            width: cardWidth,
+          ),
+          width: cardWidth,
           title: persons[i].name ?? "None",
         );
       },
@@ -171,10 +192,12 @@ class SearchMediaList extends StatelessWidget {
                   child: SizedBox(
                     width: 100,
                     height: 150,
-                    child: ImageFormatter.formatImageWidget(context,
-                        imagePath: mediaModel.posterPath,
-                        height: double.infinity,
-                        width: 140),
+                    child: ImageFormatter.formatImageWidget(
+                      context,
+                      imagePath: mediaModel.posterPath,
+                      height: double.infinity,
+                      width: 140,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),

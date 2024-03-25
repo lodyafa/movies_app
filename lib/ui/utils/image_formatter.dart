@@ -18,7 +18,7 @@ class ImageFormatter {
     final Widget assetImage = SizedBox(
       height: height,
       width: width,
-      child: Image.asset(_unknownMediaImagePath),
+      child: Image.asset(_unknownMediaImagePath, fit: BoxFit.cover,),
     );
 
     if (imagePath == null) return assetImage;

@@ -24,7 +24,7 @@ class HomeBody extends StatelessWidget {
             ),
           );
         }
-    
+
         return ListView(
           padding: const EdgeInsets.only(left: 16),
           children: [
@@ -36,33 +36,33 @@ class HomeBody extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             HomeCategoryList<MovieModel>(
-cardHeight: 210,
+              cardHeight: 210,
               cardWidth: 140,
               title: "Trending Movies",
               media: state.trendingMovies,
             ),
             const SizedBox(height: 10),
-            // HomeCategoryList<SeriesModel>(
-            //   cardHeight: 180,
-            //   cardWidth: 120,
-            //   title: "Popular TV Series",
-            //   media: state.popularSeries,
-            // ),
-            // const SizedBox(height: 10),
-            // HomeCategoryList<MovieModel>(
-            //   cardHeight: 180,
-            //   cardWidth: 120,
-            //   title: "Now playing",
-            //   media: state.nowPlayingMovies,
-            // ),
-            // const SizedBox(height: 10),
-            // HomeCategoryList<PersonModel>(
-            //   cardHeight: 180,
-            //   cardWidth: 120,
-            //   title: "Popular people",
-            //   media: state.popularPeople,
-            // ),
-            // const SizedBox(height: 10),
+            HomeCategoryList<SeriesModel>(
+              cardHeight: 210,
+              cardWidth: 140,
+              title: "Popular TV Series",
+              media: state.popularSeries,
+            ),
+            const SizedBox(height: 10),
+            HomeCategoryList<MovieModel>(
+              cardHeight: 210,
+              cardWidth: 140,
+              title: "Now playing",
+              media: state.nowPlayingMovies,
+            ),
+            const SizedBox(height: 10),
+            HomeCategoryList<PersonModel>(
+              cardHeight: 210,
+              cardWidth: 140,
+              title: "Popular people",
+              media: state.popularPeople,
+            ),
+            const SizedBox(height: 10),
           ],
         );
       },

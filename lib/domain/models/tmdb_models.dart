@@ -93,7 +93,7 @@ class SeriesModel extends TMDBModel {
   final dynamic voteAverage;
   final dynamic voteCount;
   final dynamic episodeRunTime;
-  final List<String>? languages;
+  final List<dynamic>? languages;
   final String? lastAirDate;
   final int? numberOfEpisodes;
   final int? numberOfSeasons;
@@ -102,6 +102,7 @@ class SeriesModel extends TMDBModel {
   final String? status;
   final String? tagline;
   final String? type;
+  final List<Genre>? genres;
 
   SeriesModel({
     this.id,
@@ -127,9 +128,15 @@ class SeriesModel extends TMDBModel {
     this.homepage,
     this.inProduction,
     this.languages,
+    this.genres,
   });
 
   factory SeriesModel.fromJson(Map<String, dynamic> json) {
+
+    List<Genre> genres = json["genres"] == null
+        ? []
+        : Genre.fromJsonGenresList(json["genres"] as List<dynamic>);
+
     return SeriesModel(
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
@@ -154,6 +161,7 @@ class SeriesModel extends TMDBModel {
       inProduction: json["in_production"],
       languages: json["languages"],
       lastAirDate: json["last_air_date"] ?? "None",
+      genres: genres,
     );
   }
 }
@@ -213,7 +221,6 @@ class PersonModel extends TMDBModel {
     );
   }
 }
-
 
 class Genre {
   final dynamic id;

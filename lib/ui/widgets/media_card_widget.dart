@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MovieCardWidget extends StatelessWidget {
-  const MovieCardWidget({
+class MediaCardWidget extends StatelessWidget {
+  const MediaCardWidget({
     super.key,
     required this.image,
     required this.width,

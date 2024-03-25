@@ -29,9 +29,10 @@ class MediaClient {
               .map((json) => MovieModel.fromJson(json))
               .toList();
       return popularMovies;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      return const [];
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -55,9 +56,10 @@ class MediaClient {
               .map((json) => MovieModel.fromJson(json))
               .toList();
       return trendingMovies;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      return const [];
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -81,9 +83,10 @@ class MediaClient {
               .map((json) => MovieModel.fromJson(json))
               .toList();
       return nowPlayingMovies;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      return const [];
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -107,9 +110,10 @@ class MediaClient {
               .map((json) => SeriesModel.fromJson(json))
               .toList();
       return popularSeries;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      return const [];
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -133,9 +137,10 @@ class MediaClient {
               .map((json) => PersonModel.fromJson(json))
               .toList();
       return popularPeople;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      return const [];
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -167,9 +172,10 @@ class MediaClient {
         }
       }).toList();
       return models;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      return const [];
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -190,9 +196,10 @@ class MediaClient {
       final MovieModel movieDetails = MovieModel.fromJson(
           movieDetailsResponse.data as Map<String, dynamic>);
       return movieDetails;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      throw Exception("Failed to fetch movie details");
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -213,9 +220,11 @@ class MediaClient {
       final SeriesModel seriesDetails = SeriesModel.fromJson(
           seriesDetailsResponse.data as Map<String, dynamic>);
       return seriesDetails;
+    } on ApiException {
+      rethrow;
     } catch (err) {
       print(err);
-      throw Exception("Failed to fetch series details");
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -236,9 +245,10 @@ class MediaClient {
       final PersonModel personDetails = PersonModel.fromJson(
           personDetailsResponse.data as Map<String, dynamic>);
       return personDetails;
+    } on ApiException {
+      rethrow;
     } catch (err) {
-      print(err);
-      throw Exception("Failed to fetch person details");
+      throw ApiException(type: ApiExceptionType.unknown);
     }
   }
 
@@ -260,6 +270,32 @@ class MediaClient {
           .map((actorJson) => PersonModel.fromJson(actorJson))
           .toList();
       return movieActors;
+    } on ApiException {
+      rethrow;
+    } catch (err) {
+      throw ApiException(type: ApiExceptionType.unknown);
+    }
+  }
+
+  Future<List<PersonModel>> getSeriesActors({
+    required int seriesId,
+    required String locale,
+  }) async {
+    Map<String, dynamic> parameters = {
+      "language": locale,
+      "api_key": _apiKey,
+    };
+    try {
+      final Response seriesActorsResponse = await _httpClient.get(
+        path: "${ApiConfig.seriesPath}/$seriesId/credits",
+        parameters: parameters,
+      );
+
+      List<PersonModel> seriesActors =
+          (seriesActorsResponse.data["cast"] as List)
+              .map((actorJson) => PersonModel.fromJson(actorJson))
+              .toList();
+      return seriesActors;
     } on ApiException {
       rethrow;
     } catch (err) {

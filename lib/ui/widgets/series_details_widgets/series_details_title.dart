@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 
-class MovieDetailsTitle extends StatelessWidget {
-  const MovieDetailsTitle({
+class SeriesDetailsTitle extends StatelessWidget {
+  const SeriesDetailsTitle({
     super.key,
-    this.movieTitle,
+    this.seriesTitle,
   });
 
-  final String? movieTitle;
+  final String? seriesTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,10 @@ class MovieDetailsTitle extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
         child: Text(
-          movieTitle ?? "Unknown title",
+          seriesTitle ?? "Unknown title",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontSize: 25),
+          style: const TextStyle(fontSize: 20),
         ),
       ),
     );

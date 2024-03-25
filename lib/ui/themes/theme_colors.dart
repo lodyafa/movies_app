@@ -36,11 +36,11 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     );
   }
 
-  static get light => ThemeColors(
+  static get light => const ThemeColors(
         filterButtonFillColor: AppColors.grey,
       );
 
-  static get dark => ThemeColors(
+  static get dark => const ThemeColors(
         filterButtonFillColor: AppColors.white,
       );
 }

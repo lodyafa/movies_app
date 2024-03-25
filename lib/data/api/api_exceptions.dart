@@ -1,5 +1,6 @@
 
-enum ApiExceptionType { network, auth, sessionExpired, unknown }
+enum 
+ApiExceptionType { network, auth, sessionExpired, unknown }
 
 class ApiException {
   final ApiExceptionType type;

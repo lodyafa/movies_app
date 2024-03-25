@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/data/api/api_clients/media_client.dart';
 import 'package:movies_app/ui/blocs/movie_details_bloc/movie_details_bloc.dart';
-import 'package:movies_app/ui/widgets/movie_details_appbar.dart';
-import 'package:movies_app/ui/widgets/movie_details_body.dart';
+import 'package:movies_app/ui/widgets/movie_details_widgets/movie_details_appbar.dart';
+import 'package:movies_app/ui/widgets/movie_details_widgets/movie_details_body.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   const MovieDetailsScreen({

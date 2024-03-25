@@ -23,12 +23,12 @@ class CustomErrorWidget extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 150,
+            size: 60,
           ),
           const SizedBox(height: 20),
           Text(text),
           const SizedBox(height: 20),
-          FloatingActionButton(
+          ElevatedButton(
             onPressed: onPressed,
             child: Text(btnText),
           )

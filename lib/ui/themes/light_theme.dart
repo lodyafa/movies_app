@@ -22,14 +22,6 @@ ThemeData createLightTheme() {
       ),
     ),
     focusColor: Colors.blue.withOpacity(0.2),
-    appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+    appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
   );
 }
-
-// seedColor: const Color(0xFFEC612A),
-//             primary: const Color(0xFFEC612A),
-//             onPrimary: const Color(0xFFFFFFFF),
-//             secondary: const Color(0xFF262626),
-//             onSecondary: const Color(0xFF939393),
-//             background: const Color(0xFF000000),
-//             surface: const Color(0xFF121212),

@@ -7,11 +7,9 @@ class SearchTextFieldWidget extends StatelessWidget {
     super.key,
     this.iconButton,
     required this.hintText,
-    // required this.prefixIconButton,
   });
 
   final IconButton? iconButton;
-  // final IconButton? prefixIconButton;
   final String hintText;
 
   @override
@@ -42,7 +40,7 @@ class SearchTextFieldWidget extends StatelessWidget {
           color: Theme.of(context).colorScheme.onSecondary,
         ),
         suffixIcon: iconButton,
-        prefixIcon: Icon(Icons.search),
+        prefixIcon: const Icon(Icons.search),
       ),
     );
   }

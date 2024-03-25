@@ -29,10 +29,14 @@ class HomeCategoryList<T> extends StatelessWidget {
       );
     } else if (T == SeriesModel) {
       mediaList = SeriesListView(
+        cardWidth: cardWidth,
+        cardHeight: cardHeight,
         series: media.cast<SeriesModel>(),
       );
     } else if (T == PersonModel) {
       mediaList = PersonListView(
+        cardWidth: cardWidth,
+        cardHeight: cardHeight,
         persons: media.cast<PersonModel>(),
       );
     }
