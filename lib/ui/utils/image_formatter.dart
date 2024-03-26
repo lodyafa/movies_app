@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/data/api/api_config.dart';
 
 class ImageFormatter {
-  static const _unknownMediaImagePath = "assets/images/unknown_media_image.png";
+  static const _unknownMediaImagePath = "assets/images/unknown_media_image.webp";
 
   static String _formatImageUrl({required String path, int size = 500}) {
     return "${ApiConfig.imageUrl}/w$size$path";

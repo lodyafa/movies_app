@@ -6,6 +6,7 @@ import 'package:movies_app/ui/screens/branches/root_screen.dart';
 import 'package:movies_app/ui/screens/branches/search_screen.dart';
 import 'package:movies_app/ui/screens/branches/watch_list_screen.dart';
 import 'package:movies_app/ui/screens/movie_details_screen.dart';
+import 'package:movies_app/ui/screens/person_details_screen.dart';
 import 'package:movies_app/ui/screens/screen_loader.dart';
 import 'package:movies_app/ui/screens/series_details_screen.dart';
 
@@ -40,7 +41,7 @@ class AppRouter {
                         appBarTitle: extra[1],
                       );
                     },
-                  )
+                  ),
                 ],
               ),
               GoRoute(
@@ -56,7 +57,23 @@ class AppRouter {
                         appBarTitle: extra[1],
                       );
                     },
-                  )
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppRoutes.home,
+                builder: (context, state) => const HomeScreen(),
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.personDetails,
+                    builder: (context, state) {
+                      final extra = state.extra as List;
+                      return PersonDetailsScreen(
+                        personId: extra[0],
+                        appBarTitle: extra[1],
+                      );
+                    },
+                  ),
                 ],
               ),
             ],
@@ -66,6 +83,50 @@ class AppRouter {
               GoRoute(
                 path: AppRoutes.search,
                 builder: (context, state) => const SearchScreen(),
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.movieDetails,
+                    builder: (context, state) {
+                      final extra = state.extra as List;
+                      return MovieDetailsScreen(
+                        movieId: extra[0],
+                        appBarTitle: extra[1],
+                      );
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppRoutes.search,
+                builder: (context, state) => const SearchScreen(),
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.seriesDetails,
+                    builder: (context, state) {
+                      final extra = state.extra as List;
+                      return SeriesDetailsScreen(
+                        seriesId: extra[0],
+                        appBarTitle: extra[1],
+                      );
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppRoutes.search,
+                builder: (context, state) => const SearchScreen(),
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.personDetails,
+                    builder: (context, state) {
+                      final extra = state.extra as List;
+                      return PersonDetailsScreen(
+                        personId: extra[0],
+                        appBarTitle: extra[1],
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

@@ -105,15 +105,23 @@ class PersonListView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       separatorBuilder: (ctx, i) => const SizedBox(width: 15),
       itemBuilder: (ctx, i) {
-        return MediaCardWidget(
-          image: ImageFormatter.formatImageWidget(
-            context,
-            imagePath: persons[i].profilePath,
-            height: cardHeight,
+        return GestureDetector(
+          onTap: () {
+            context.go(
+              "${AppRoutes.home}/${AppRoutes.personDetails}",
+              extra: [persons[i].id, persons[i].name],
+            );
+          },
+          child: MediaCardWidget(
+            image: ImageFormatter.formatImageWidget(
+              context,
+              imagePath: persons[i].profilePath,
+              height: cardHeight,
+              width: cardWidth,
+            ),
             width: cardWidth,
+            title: persons[i].name ?? "None",
           ),
-          width: cardWidth,
-          title: persons[i].name ?? "None",
         );
       },
       itemCount: persons.length,
@@ -177,7 +185,10 @@ class SearchMediaList extends StatelessWidget {
               ],
             ),
             onTap: () {
-              // нажатие
+              context.go(
+                "${AppRoutes.search}/${AppRoutes.movieDetails}",
+                extra: [mediaModel.id, mediaModel.title],
+              );
             },
           );
         }
@@ -225,7 +236,10 @@ class SearchMediaList extends StatelessWidget {
               ],
             ),
             onTap: () {
-              // нажатие
+              context.go(
+                "${AppRoutes.search}/${AppRoutes.seriesDetails}",
+                extra: [mediaModel.id, mediaModel.name],
+              );
             },
           );
         }
@@ -266,7 +280,10 @@ class SearchMediaList extends StatelessWidget {
               ],
             ),
             onTap: () {
-              // нажатие
+              context.go(
+                "${AppRoutes.search}/${AppRoutes.personDetails}",
+                extra: [mediaModel.id, mediaModel.name],
+              );
             },
           );
         }

@@ -132,7 +132,6 @@ class SeriesModel extends TMDBModel {
   });
 
   factory SeriesModel.fromJson(Map<String, dynamic> json) {
-
     List<Genre> genres = json["genres"] == null
         ? []
         : Genre.fromJsonGenresList(json["genres"] as List<dynamic>);
@@ -182,6 +181,8 @@ class PersonModel extends TMDBModel {
   final String? birthday;
   final dynamic gender;
   final String? placeOfBirth;
+  final String? biography;
+  final String? posterPath;
 
   PersonModel({
     this.backdropPath,
@@ -199,6 +200,8 @@ class PersonModel extends TMDBModel {
     this.popularity,
     this.gender,
     this.placeOfBirth,
+    this.biography,
+    this.posterPath,
   });
 
   factory PersonModel.fromJson(Map<String, dynamic> json) {
@@ -218,6 +221,8 @@ class PersonModel extends TMDBModel {
       placeOfBirth: json['place_of_birth'],
       popularity: json["popularity"],
       birthday: json['birthday'],
+      biography: json["biography"],
+      posterPath: json['poster_path'],
     );
   }
 }

@@ -223,7 +223,6 @@ class MediaClient {
     } on ApiException {
       rethrow;
     } catch (err) {
-      print(err);
       throw ApiException(type: ApiExceptionType.unknown);
     }
   }

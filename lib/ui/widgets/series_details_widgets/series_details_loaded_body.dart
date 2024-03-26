@@ -56,7 +56,7 @@ class SeriesDetailsLoadedBody extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SeriesExtraInfo(

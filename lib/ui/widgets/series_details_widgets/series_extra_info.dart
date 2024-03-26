@@ -45,9 +45,13 @@ class SeriesExtraInfo extends StatelessWidget {
             const SizedBox(width: 5),
             Text(releaseDateString),
             const SizedBox(width: 10),
+            const Text("|"),
+            const SizedBox(width: 10),
             const Icon(Icons.watch_later_sharp),
             const SizedBox(width: 5),
             Text("${numberOfEpisodes.toString()} episodes"),
+            const SizedBox(width: 10),
+            const Text("|"),
             const SizedBox(width: 10),
             Icon(
               Icons.star,
@@ -73,7 +77,9 @@ class SeriesExtraInfo extends StatelessWidget {
                   ? "${numberOfSeasons.toString()} season"
                   : "${numberOfSeasons.toString()} seasons",
             ),
-            const SizedBox(width: 15),
+            const SizedBox(width: 10),
+            const Text("|"),
+            const SizedBox(width: 10),
             Text(
               genresString,
               maxLines: 1,
