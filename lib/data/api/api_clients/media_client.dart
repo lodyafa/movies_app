@@ -301,4 +301,29 @@ class MediaClient {
       throw ApiException(type: ApiExceptionType.unknown);
     }
   }
+
+  Future<AccountModel> getAccountDetails({
+    required int accountId,
+    required String sessionId,
+  }) async {
+    Map<String, dynamic> parameters = {
+      'session_id': sessionId,
+      'api_key': _apiKey,
+    };
+    try {
+      final Response accountDetailsResponse = await _httpClient.get(
+        path: "${ApiConfig.accountPath}/$accountId",
+        parameters: parameters,
+      );
+
+      final AccountModel accountDetails = AccountModel.fromJson(
+          accountDetailsResponse.data as Map<String, dynamic>);
+
+      return accountDetails;
+    } on ApiException {
+      rethrow;
+    } catch (err) {
+      throw ApiException(type: ApiExceptionType.unknown);
+    }
+  }
 }

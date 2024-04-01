@@ -69,6 +69,7 @@ class SeriesExtraInfo extends StatelessWidget {
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(Icons.confirmation_number_sharp),
             const SizedBox(width: 5),
@@ -80,10 +81,12 @@ class SeriesExtraInfo extends StatelessWidget {
             const SizedBox(width: 10),
             const Text("|"),
             const SizedBox(width: 10),
-            Text(
-              genresString,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            Flexible(
+              child: Text(
+                genresString,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),

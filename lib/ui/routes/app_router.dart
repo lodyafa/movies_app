@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
 import 'package:movies_app/ui/screens/authorization_screen.dart';
+import 'package:movies_app/ui/screens/branches/account_screen.dart';
 import 'package:movies_app/ui/screens/branches/home_screen.dart';
 import 'package:movies_app/ui/screens/branches/root_screen.dart';
 import 'package:movies_app/ui/screens/branches/search_screen.dart';
@@ -71,6 +72,22 @@ class AppRouter {
                       return PersonDetailsScreen(
                         personId: extra[0],
                         appBarTitle: extra[1],
+                      );
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: AppRoutes.home,
+                builder: (context, state) => const HomeScreen(),
+                routes: [
+                  GoRoute(
+                    path: AppRoutes.account,
+                    builder: (context, state) {
+                      // final extra = state.extra as List;
+                      return AccountScreen(
+                        // personId: extra[0],
+                        // appBarTitle: extra[1],
                       );
                     },
                   ),

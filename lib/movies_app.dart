@@ -1,10 +1,13 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:movies_app/data/api/api_clients/account_client.dart';
 import 'package:movies_app/data/api/api_clients/auth_client.dart';
 import 'package:movies_app/data/api/api_clients/session_data_client.dart';
+import 'package:movies_app/data/clients/connectivity_client.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
+import 'package:movies_app/ui/cubits/connectivity_cubit/connectivity_cubit.dart';
 import 'package:movies_app/ui/routes/app_router.dart';
 import 'package:movies_app/ui/themes/theme.dart';
 
@@ -15,6 +18,11 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider(
+          create: (context) => ConnectivityClient(
+            connectivity: Connectivity(),
+          ),
+        ),
         RepositoryProvider(
           create: (context) => AuthClient(),
         ),
@@ -29,6 +37,12 @@ class MoviesApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => ConnectivityCubit(
+              connectivityClient:
+                  RepositoryProvider.of<ConnectivityClient>(context),
+            ),
+          ),
           BlocProvider(
             create: (context) => AuthBloc(
               authClient: RepositoryProvider.of<AuthClient>(context),

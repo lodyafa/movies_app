@@ -61,3 +61,5 @@ class HomeAllMediaEvent extends HomeBlocEvent {
     this.page = 1,
   });
 }
+
+class HomeNetworkErrorEvent extends HomeBlocEvent {}
