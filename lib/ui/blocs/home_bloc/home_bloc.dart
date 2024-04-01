@@ -1,29 +1,52 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-// import 'package:meta/meta.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:movies_app/data/api/api_clients/media_client.dart';
+import 'package:movies_app/data/api/api_exceptions.dart';
 import 'package:movies_app/domain/models/tmdb_models.dart';
+import 'package:movies_app/ui/cubits/connectivity_cubit/connectivity_cubit.dart';
 
 part 'home_bloc_event.dart';
 part 'home_bloc_state.dart';
 
-class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
+class HomeBloc extends Bloc<HomeBlocEvent, HomeState> {
+  late final ConnectivityCubit _connectivityCubit;
+  late final StreamSubscription _connectivityCubitSubscription;
   late final MediaClient _tmdbMediaClient;
 
   HomeBloc({
+    required ConnectivityCubit connectivityCubit,
     required MediaClient tmdbMediaClient,
-  })  : _tmdbMediaClient = tmdbMediaClient,
-        super(HomeBlocState()) {
-    on<HomeAllMediaEvent>(_onAllMedia);
-    on<HomePopularMoviesEvent>(_onPopularMovies);
-    on<HomePopularTVSeriesEvent>(_onPopularSeries);
-    on<HomeTrendingMoviesEvent>(_onTrendingMovies);
-    on<HomeNowPlayingMoviesEvent>(_onNowPlayingMovies);
-    on<HomePopularPeopleEvent>(_onPopularPeople);
+  })  : _connectivityCubit = connectivityCubit,
+        _tmdbMediaClient = tmdbMediaClient,
+        super(HomeState()) {
+    Future.microtask(
+      () {
+        _onConnectivityStateChanged(connectivityCubit.state);
+        _connectivityCubitSubscription =
+            _connectivityCubit.stream.listen(_onConnectivityStateChanged);
+      },
+    );
+
+    on<HomeAllMediaEvent>(_onAllMedia, transformer: sequential());
+    on<HomeNetworkErrorEvent>(_onNetworkError);
+  }
+
+  void _onConnectivityStateChanged(ConnectivityState state) {
+    if (state.type == ConnectivityStateType.offline) {
+      add(HomeNetworkErrorEvent());
+    } else if (state.type == ConnectivityStateType.connected) {
+      print("mcnsdjfbsdvbdfjhsv dbvfdb vjv AAAAAAAAAAAA");
+      add(HomeAllMediaEvent());
+    }
   }
 
   Future<void> _onAllMedia(
-      HomeAllMediaEvent event, Emitter<HomeBlocState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    HomeAllMediaEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(HomeBlocLoadingState());
 
     final List<MovieModel> popularMovies =
         await _tmdbMediaClient.getPopularMovies(
@@ -63,7 +86,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       page: event.page,
     );
 
-    emit(state.copyWith(
+    emit(HomeLoadedState(
       popularMovies: popularMovies,
       popularSeries: popularSeries,
       popularPeople: popularPeople,
@@ -72,58 +95,16 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     ));
   }
 
-  _onPopularMovies(
-      HomePopularMoviesEvent event, Emitter<HomeBlocState> emit) async {
-    final List<MovieModel> popularMovies =
-        await _tmdbMediaClient.getPopularMovies(
-      locale: event.locale,
-      page: event.page,
-    );
-    if (popularMovies.isEmpty) return;
-    emit(state.copyWith(popularMovies: popularMovies));
+  void _onNetworkError(
+      HomeNetworkErrorEvent event, Emitter<HomeState> emit) {
+    emit(HomeFailureState(
+      failure: ApiException(type: ApiExceptionType.network),
+    ));
   }
 
-  _onPopularSeries(
-      HomePopularTVSeriesEvent event, Emitter<HomeBlocState> emit) async {
-    final List<SeriesModel> popularSeries =
-        await _tmdbMediaClient.getPopularSeries(
-      locale: event.locale,
-      page: event.page,
-    );
-    if (popularSeries.isEmpty) return;
-    emit(state.copyWith(popularSeries: popularSeries));
-  }
-
-  _onTrendingMovies(
-      HomeTrendingMoviesEvent event, Emitter<HomeBlocState> emit) async {
-    final List<MovieModel> trendingMovies =
-        await _tmdbMediaClient.getTrendingMovies(
-      locale: event.locale,
-      page: event.page,
-    );
-    if (trendingMovies.isEmpty) return;
-    emit(state.copyWith(trendingMovies: trendingMovies));
-  }
-
-  _onNowPlayingMovies(
-      HomeNowPlayingMoviesEvent event, Emitter<HomeBlocState> emit) async {
-    final List<MovieModel> nowPlayingMovies =
-        await _tmdbMediaClient.getNowPlayingMovies(
-      locale: event.locale,
-      page: event.page,
-    );
-    if (nowPlayingMovies.isEmpty) return;
-    emit(state.copyWith(nowPlayingMovies: nowPlayingMovies));
-  }
-
-  _onPopularPeople(
-      HomePopularPeopleEvent event, Emitter<HomeBlocState> emit) async {
-    final List<PersonModel> popularPeople =
-        await _tmdbMediaClient.getPopularPeople(
-      locale: event.locale,
-      page: event.page,
-    );
-    if (popularPeople.isEmpty) return;
-    emit(state.copyWith(popularPeople: popularPeople));
+  @override
+  Future<void> close() {
+    _connectivityCubitSubscription.cancel();
+    return super.close();
   }
 }

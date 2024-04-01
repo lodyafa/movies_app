@@ -1,37 +1,31 @@
 part of 'home_bloc.dart';
 
-class HomeBlocState {
+class HomeState {}
+
+class HomeBlocLoadingState extends HomeState {}
+
+class HomeLoadedState extends HomeState {
   final List<MovieModel> popularMovies;
   final List<MovieModel> trendingMovies;
   final List<MovieModel> nowPlayingMovies;
   final List<SeriesModel> popularSeries;
+  // final List<SeriesModel> trendingTVSeries;
   final List<PersonModel> popularPeople;
-  final bool isLoading;
 
-  HomeBlocState({
-    this.popularMovies = const [],
-    this.popularSeries = const [],
-    this.trendingMovies = const [],
-    this.nowPlayingMovies = const [],
-    this.popularPeople = const [],
-    this.isLoading = false,
+  HomeLoadedState({
+    required this.popularMovies,
+    required this.trendingMovies,
+    required this.nowPlayingMovies,
+    required this.popularSeries,
+    // required this.trendingTVSeries,
+    required this.popularPeople,
   });
+}
 
-  HomeBlocState copyWith({
-    List<MovieModel>? popularMovies,
-    List<MovieModel>? trendingMovies,
-    List<MovieModel>? nowPlayingMovies,
-    List<SeriesModel>? popularSeries,
-    List<PersonModel>? popularPeople,
-    bool? isLoading = false,
-  }) {
-    return HomeBlocState(
-      popularMovies: popularMovies ?? this.popularMovies,
-      popularSeries: popularSeries ?? this.popularSeries,
-      trendingMovies: trendingMovies ?? this.trendingMovies,
-      nowPlayingMovies: nowPlayingMovies ?? this.nowPlayingMovies,
-      popularPeople: popularPeople ?? this.popularPeople,
-      isLoading: isLoading ?? this.isLoading,
-    );
-  }
+class HomeFailureState extends HomeState {
+  final ApiException failure;
+
+  HomeFailureState({
+    required this.failure,
+  });
 }

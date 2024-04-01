@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/data/api/api_config.dart';
 
 class ImageFormatter {
-  static const _unknownMediaImagePath = "assets/images/unknown_media_image.webp";
+  static const _unknownMediaImagePath =
+      "assets/images/unknown_media_image.webp";
 
   static String _formatImageUrl({required String path, int size = 500}) {
     return "${ApiConfig.imageUrl}/w$size$path";
@@ -18,7 +19,10 @@ class ImageFormatter {
     final Widget assetImage = SizedBox(
       height: height,
       width: width,
-      child: Image.asset(_unknownMediaImagePath, fit: BoxFit.cover,),
+      child: Image.asset(
+        _unknownMediaImagePath,
+        fit: BoxFit.cover,
+      ),
     );
 
     if (imagePath == null) return assetImage;
@@ -49,6 +53,67 @@ class ImageFormatter {
       },
       errorWidget: (context, url, error) {
         return assetImage;
+      },
+    );
+  }
+
+  static Widget formatAvatarImageWidget(
+    BuildContext context, {
+    required String? imagePath,
+    required double diameter,
+  }) {
+    final double borderRadiusValue = diameter / 2.0;
+    // final ThemeData theme = Theme.of(context);
+    // final bool isDark = theme.brightness == Brightness.dark;
+
+    String unknownMediaPath;
+      unknownMediaPath = _unknownMediaImagePath;
+
+
+    Widget assetImageWidget = Container(
+      width: diameter,
+      height: diameter,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(borderRadiusValue),
+      ),
+      child: Image.asset(
+        unknownMediaPath,
+        fit: BoxFit.cover,
+      ),
+    );
+
+    if (imagePath == null) return assetImageWidget;
+
+    return CachedNetworkImage(
+      imageUrl: _formatImageUrl(path: imagePath),
+      imageBuilder: (context, imageProvider) {
+        return Container(
+          width: diameter,
+          height: diameter,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadiusValue),
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      },
+      placeholder: (context, url) {
+        return Container(
+          width: diameter,
+          height: diameter,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadiusValue),
+          ),
+        );
+      },
+      errorListener: (value) {
+        // logging...
+        print("Image Exception: $value");
+      },
+      errorWidget: (context, url, error) {
+        return assetImageWidget;
       },
     );
   }
