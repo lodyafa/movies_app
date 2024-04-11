@@ -226,7 +226,7 @@ class PersonModel extends TMDBModel {
     );
   }
 }
-
+ 
 class AccountModel extends TMDBModel {
   final int? id;
   final String? name;
