@@ -250,6 +250,29 @@ class AccountModel extends TMDBModel {
   }
 }
 
+class AccountModel extends TMDBModel {
+  final int? id;
+  final String? name;
+  final String? username;
+  final String? avatarPath;
+
+  AccountModel({
+    this.id,
+    this.name,
+    this.username,
+    this.avatarPath,
+  });
+
+  factory AccountModel.fromJson(Map<String, dynamic> json) {
+    return AccountModel(
+      id: json["id"],
+      name: json["name"],
+      username: json["username"],
+      avatarPath: json["avatar"]["tmdb"]["avatar_path"],
+    );
+  }
+}
+
 class Genre {
   final dynamic id;
   final String? name;
