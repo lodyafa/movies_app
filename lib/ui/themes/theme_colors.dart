@@ -1,8 +1,4 @@
-
-
 part of "theme.dart";
-
-
 
 class ThemeColors extends ThemeExtension<ThemeColors> {
   final Color filterButtonFillColor;

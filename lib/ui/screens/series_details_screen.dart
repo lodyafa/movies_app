@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/data/api/api_clients/media_client.dart';
-import 'package:movies_app/ui/blocs/series_deatils_bloc/series_details_bloc.dart';
+import 'package:movies_app/ui/blocs/series_details_bloc/series_details_bloc.dart';
 import 'package:movies_app/ui/widgets/series_details_widgets/series_details_appbar.dart';
 import 'package:movies_app/ui/widgets/series_details_widgets/series_details_body.dart';
 

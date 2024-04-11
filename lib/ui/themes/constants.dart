@@ -1,7 +1,7 @@
 part of "theme.dart";
 
-const displayMedium = TextStyle(fontWeight: FontWeight.w400, fontSize: 16);
-const displayLarge = TextStyle(fontWeight: FontWeight.w400, fontSize: 14);
+const displayMedium = TextStyle(fontWeight: FontWeight.w400, fontSize: 14);
+const displayLarge = TextStyle(fontWeight: FontWeight.w400, fontSize: 16);
 
 abstract class AppColors {
   static const white = Color(0xFFFFFFFF);

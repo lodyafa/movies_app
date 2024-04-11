@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/api_exceptions.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
-import 'package:movies_app/ui/blocs/series_deatils_bloc/series_details_bloc.dart';
+import 'package:movies_app/ui/blocs/series_details_bloc/series_details_bloc.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
 import 'package:movies_app/ui/widgets/error_widget.dart';
 import 'package:movies_app/ui/widgets/series_details_widgets/series_details_loaded_body.dart';
@@ -63,6 +63,7 @@ class SeriesDetailsBody extends StatelessWidget {
           return SeriesDetailsLoadedBody(
             series: state.seriesDetails,
             seriesActors: state.seriesActors,
+            seriesList: state.similarSeries ?? [],
           );
         }
 

@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class SeriesDetailsTitle extends StatelessWidget {
   const SeriesDetailsTitle({
@@ -10,14 +10,21 @@ class SeriesDetailsTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      width: double.infinity,
+      color: Theme.of(context).colorScheme.background,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-        child: Text(
-          seriesTitle ?? "Unknown title",
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontSize: 20),
+        padding: const EdgeInsets.only(left: 160, right: 25),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+            child: Text(
+              seriesTitle ?? "Unknown title",
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 20),
+            ),
+          ),
         ),
       ),
     );

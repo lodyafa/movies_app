@@ -326,4 +326,56 @@ class MediaClient {
       throw ApiException(type: ApiExceptionType.unknown);
     }
   }
+
+  Future<List<MovieModel>> getSimilarMovies({
+    required int movieId,
+    required String locale,
+  }) async {
+    Map<String, dynamic> parameters = {
+      "language": locale,
+      "api_key": _apiKey,
+    };
+    try {
+      final Response similarMoviesResponse = await _httpClient.get(
+        path: "${ApiConfig.moviePath}/$movieId/${ApiConfig.similarPath}",
+        parameters: parameters,
+      );
+
+      List<MovieModel> similarMovies =
+          (similarMoviesResponse.data["results"] as List)
+              .map((json) => MovieModel.fromJson(json))
+              .toList();
+      return similarMovies;
+    } on ApiException {
+      rethrow;
+    } catch (err) {
+      throw ApiException(type: ApiExceptionType.unknown);
+    }
+  }
+
+  Future<List<SeriesModel>> getSimilarSeries({
+    required int seriesId,
+    required String locale,
+  }) async {
+    Map<String, dynamic> parameters = {
+      "language": locale,
+      "api_key": _apiKey,
+    };
+    try {
+      final Response similarSeriesResponse = await _httpClient.get(
+        path: "${ApiConfig.seriesPath}/$seriesId/${ApiConfig.similarPath}",
+        parameters: parameters,
+      );
+
+      List<SeriesModel> similarSeries =
+          (similarSeriesResponse.data["results"] as List)
+              .map((json) => SeriesModel.fromJson(json))
+              .toList();
+      return similarSeries;
+    } on ApiException {
+      rethrow;
+    } catch (err) {
+      throw ApiException(type: ApiExceptionType.unknown);
+    }
+  }
 }

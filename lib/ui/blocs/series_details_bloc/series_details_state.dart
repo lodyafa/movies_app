@@ -7,10 +7,12 @@ final class SeriesDetailsLoadingState extends SeriesDetailsState {}
 final class SeriesDetailsLoadedState extends SeriesDetailsState {
   final SeriesModel seriesDetails;
   final List<PersonModel> seriesActors;
+  final List<SeriesModel>? similarSeries;
 
   SeriesDetailsLoadedState({
     required this.seriesDetails,
     required this.seriesActors,
+    required this.similarSeries,
   });
 }
 

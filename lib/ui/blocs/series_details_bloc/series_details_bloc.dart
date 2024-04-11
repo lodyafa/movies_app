@@ -25,13 +25,21 @@ class SeriesDetailsBloc extends Bloc<SeriesDetailsEvent, SeriesDetailsState> {
         seriesId: event.seriesId,
         locale: event.locale,
       );
+
       List<PersonModel> seriesActors = await _mediaClient.getSeriesActors(
         seriesId: event.seriesId,
         locale: event.locale,
       );
+
+      List<SeriesModel> similarSeries = await _mediaClient.getSimilarSeries(
+        seriesId: event.seriesId,
+        locale: event.locale,
+      );
+
       emit(SeriesDetailsLoadedState(
         seriesDetails: seriesDetails,
         seriesActors: seriesActors,
+        similarSeries: similarSeries,
       ));
     } on ApiException catch (exception) {
       emit(SeriesDetailsFailureState(failure: exception));

@@ -20,4 +20,8 @@ abstract class ApiConfig {
   static const String moviePath = "/movie";
   static const String seriesPath = "/tv";
   static const String personPath = "/person";
+
+  static const String similarPath = "similar";
+
+
 }

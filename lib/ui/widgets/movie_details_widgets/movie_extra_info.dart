@@ -6,14 +6,12 @@ class MovieExtraInfo extends StatelessWidget {
     super.key,
     required this.runtime,
     required this.releaseDate,
-    // required this.productionCountries,
     required this.genres,
     required this.voteAverage,
   });
 
   final int? runtime;
   final String? releaseDate;
-  // final List<ProductionCountry> productionCountries;
   final List<Genre> genres;
   final String voteAverage;
 
@@ -26,20 +24,6 @@ class MovieExtraInfo extends StatelessWidget {
       DateTime date = DateTime.parse(releaseDate!);
       releaseDateString = "${date.year}";
     }
-
-    // String productionCountriesString = "";
-    // if (productionCountries.isEmpty) {
-    //   productionCountriesString = "None";
-    // } else {
-    //   for (int i = 0; i < productionCountries.length; i++) {
-    //     if (productionCountries[i].iso_3166_1 == null ||
-    //         productionCountries[i].iso_3166_1!.isEmpty) continue;
-    //     productionCountriesString += productionCountries[i].iso_3166_1!;
-    //     if (i + 1 < productionCountries.length) {
-    //       productionCountriesString += ", ";
-    //     }
-    //   }
-    // }
 
     String genresString = "";
     for (int i = 0; i < genres.length; i++) {
@@ -78,10 +62,6 @@ class MovieExtraInfo extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            // const SizedBox(width: 20),
-            // const Icon(Icons.public),
-            // const SizedBox(width: 5),
-            // Text(productionCountriesString),
           ],
         ),
         const SizedBox(height: 10),

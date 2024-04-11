@@ -63,6 +63,7 @@ class MovieDetailsBody extends StatelessWidget {
           return MovieDetailsLoadedBody(
             movie: state.movieDetails,
             movieActors: state.movieActors,
+            movies: state.similarMovies ?? [],
           );
         }
 

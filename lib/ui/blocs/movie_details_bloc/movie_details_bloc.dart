@@ -26,6 +26,11 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
         locale: event.locale,
       );
 
+      List<MovieModel> similarMovies = await _mediaClient.getSimilarMovies(
+        movieId: event.movieId,
+        locale: event.locale,
+      );
+
       List<PersonModel> movieActors = await _mediaClient.getMovieActors(
         locale: event.locale,
         movieId: event.movieId,
@@ -34,6 +39,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
       emit(MovieDetailsLoadedState(
         movieDetails: movieDetails,
         movieActors: movieActors,
+        similarMovies: similarMovies,
       ));
     } on ApiException catch (exception) {
       emit(MovieDetailsFailureState(failure: exception));
