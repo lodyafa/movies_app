@@ -15,8 +15,6 @@ class PersonExtraInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,7 +27,11 @@ class PersonExtraInfo extends StatelessWidget {
             const SizedBox(width: 10),
             const Icon(Icons.watch_later_sharp),
             const SizedBox(width: 5),
-            Text(placeOfBirth ?? "None"),
+            Expanded(
+              child: Text(
+                placeOfBirth ?? "None",
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 10),

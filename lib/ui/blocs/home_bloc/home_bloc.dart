@@ -54,15 +54,11 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeState> {
       page: event.page,
     );
 
-    await Future.delayed(const Duration(milliseconds: 200));
-
     final List<SeriesModel> popularSeries =
         await _tmdbMediaClient.getPopularSeries(
       locale: event.locale,
       page: event.page,
     );
-
-    await Future.delayed(const Duration(milliseconds: 200));
 
     final List<MovieModel> trendingMovies =
         await _tmdbMediaClient.getTrendingMovies(
@@ -70,18 +66,14 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeState> {
       page: event.page,
     );
 
-    await Future.delayed(const Duration(milliseconds: 200));
-
     final List<MovieModel> nowPlayingMovies =
         await _tmdbMediaClient.getNowPlayingMovies(
       locale: event.locale,
       page: event.page,
     );
 
-    await Future.delayed(const Duration(milliseconds: 200));
-
     final List<PersonModel> popularPeople =
-        await _tmdbMediaClient.getPopularPeople(
+        await _tmdbMediaClient.getPopularActors(
       locale: event.locale,
       page: event.page,
     );
@@ -95,8 +87,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeState> {
     ));
   }
 
-  void _onNetworkError(
-      HomeNetworkErrorEvent event, Emitter<HomeState> emit) {
+  void _onNetworkError(HomeNetworkErrorEvent event, Emitter<HomeState> emit) {
     emit(HomeFailureState(
       failure: ApiException(type: ApiExceptionType.network),
     ));

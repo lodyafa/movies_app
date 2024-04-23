@@ -117,7 +117,7 @@ class MediaClient {
     }
   }
 
-  Future<List<PersonModel>> getPopularPeople({
+  Future<List<PersonModel>> getPopularActors({
     required String locale,
     required int page,
   }) async {
@@ -127,16 +127,16 @@ class MediaClient {
       "api_key": _apiKey,
     };
     try {
-      final Response popularPeopleResponse = await _httpClient.get(
+      final Response popularActorsResponse = await _httpClient.get(
         path: ApiConfig.popularPersonPath,
         parameters: parameters,
       );
 
-      final List<PersonModel> popularPeople =
-          (popularPeopleResponse.data["results"] as List)
+      final List<PersonModel> popularActors =
+          (popularActorsResponse.data["results"] as List)
               .map((json) => PersonModel.fromJson(json))
               .toList();
-      return popularPeople;
+      return popularActors;
     } on ApiException {
       rethrow;
     } catch (err) {

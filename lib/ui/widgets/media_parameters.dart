@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Parameters extends StatelessWidget {
-  const Parameters({
+class MediaParameters extends StatelessWidget {
+  const MediaParameters({
     super.key,
     required this.voteAverage,
     required this.releaseDate,

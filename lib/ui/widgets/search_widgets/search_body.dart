@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/domain/models/tmdb_models.dart';
 import 'package:movies_app/ui/blocs/search_bloc/search_bloc.dart';
@@ -18,11 +19,16 @@ class SearchBody extends StatelessWidget {
             );
           }
           final List<TMDBModel> media = state.searchMedia;
+          if (media.isEmpty) {
+            return Center(
+              child: Animate(
+                effects: const [ShakeEffect()],
+                child: const Text("Nothing found...")),
+            );
+          }
           return SearchMediaList(media: media);
         },
       ),
     );
   }
 }
-
-

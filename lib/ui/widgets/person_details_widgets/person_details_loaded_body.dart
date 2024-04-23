@@ -14,33 +14,37 @@ class PersonDetailsLoadedBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(padding: const EdgeInsets.all(0), children: [
-      Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          children: [
-            ImageFormatter.formatImageWidget(
-              context,
-              imagePath: person.profilePath,
-              height: 210,
-              width: 140,
-            ),
-            const SizedBox(width: 10),
-            PersonDetailsName(
-              personName: person.name,
-            ),
-          ],
+    return ListView(
+      padding: const EdgeInsets.all(0),
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              ImageFormatter.formatImageWidget(
+                context,
+                imagePath: person.profilePath,
+                height: 210,
+                width: 140,
+              ),
+              Expanded(
+                child: PersonDetailsName(
+                  personName: person.name,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      const SizedBox(height: 10),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: PersonExtraInfo(
-          biography: person.biography,
-          birthday: person.birthday,
-          placeOfBirth: person.placeOfBirth,
-        ),
-      )
-    ]);
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: PersonExtraInfo(
+            biography: person.biography,
+            birthday: person.birthday,
+            placeOfBirth: person.placeOfBirth,
+          ),
+        )
+      ],
+    );
   }
 }

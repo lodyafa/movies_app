@@ -6,10 +6,12 @@ class MediaCardWidget extends StatelessWidget {
     required this.image,
     required this.width,
     required this.title,
+    required this.textWidth,
   });
 
   final Widget image;
   final double width;
+  final double textWidth;
   final String title;
 
   @override
@@ -24,15 +26,17 @@ class MediaCardWidget extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        SizedBox(
-          width: 140,
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
+        Expanded(
+          child: SizedBox(
+            width: textWidth,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

@@ -36,7 +36,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       page: event.page,
       query: event.query,
     );
-    if (media.isEmpty) return;
     emit(state.copyWith(searchMedia: media));
   }
 }

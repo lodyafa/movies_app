@@ -6,6 +6,8 @@ class ImageFormatter {
   static const _unknownMediaImagePath =
       "assets/images/unknown_media_image.webp";
 
+  static String get unknownMediaImagePath => _unknownMediaImagePath;
+
   static String _formatImageUrl({required String path, int size = 500}) {
     return "${ApiConfig.imageUrl}/w$size$path";
   }
@@ -63,12 +65,9 @@ class ImageFormatter {
     required double diameter,
   }) {
     final double borderRadiusValue = diameter / 2.0;
-    // final ThemeData theme = Theme.of(context);
-    // final bool isDark = theme.brightness == Brightness.dark;
 
     String unknownMediaPath;
-      unknownMediaPath = _unknownMediaImagePath;
-
+    unknownMediaPath = _unknownMediaImagePath;
 
     Widget assetImageWidget = Container(
       width: diameter,

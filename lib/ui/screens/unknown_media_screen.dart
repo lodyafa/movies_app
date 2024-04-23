@@ -1,7 +1,9 @@
+
+
 import 'package:flutter/material.dart';
 
-class WatchListScreen extends StatelessWidget {
-  const WatchListScreen({super.key});
+class UnknownMediaScreen extends StatelessWidget {
+  const UnknownMediaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

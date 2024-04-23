@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/api_exceptions.dart';
 import 'package:movies_app/domain/models/tmdb_models.dart';
+import 'package:movies_app/ui/blocs/all_media_bloc/all_media_bloc.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
 import 'package:movies_app/ui/blocs/home_bloc/home_bloc.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
@@ -68,6 +69,12 @@ class HomeBody extends StatelessWidget {
                 cardWidth: 140,
                 title: "Popular Movies",
                 media: state.popularMovies,
+                onPressedAllMediaBtn: () {
+                  context.push(
+                    "${AppRoutes.home}/${AppRoutes.allMedia}",
+                    extra: ApiMediaQueryType.popularMovies.asString(),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               HomeCategoryList<MovieModel>(
@@ -75,6 +82,12 @@ class HomeBody extends StatelessWidget {
                 cardWidth: 140,
                 title: "Trending Movies",
                 media: state.trendingMovies,
+                onPressedAllMediaBtn: () {
+                  context.push(
+                    "${AppRoutes.home}/${AppRoutes.allMedia}",
+                    extra: ApiMediaQueryType.trendingMovies.asString(),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               HomeCategoryList<SeriesModel>(
@@ -82,6 +95,12 @@ class HomeBody extends StatelessWidget {
                 cardWidth: 140,
                 title: "Popular TV Series",
                 media: state.popularSeries,
+                onPressedAllMediaBtn: () {
+                  context.push(
+                    "${AppRoutes.home}/${AppRoutes.allMedia}",
+                    extra: ApiMediaQueryType.popularSeries.asString(),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               HomeCategoryList<MovieModel>(
@@ -89,6 +108,12 @@ class HomeBody extends StatelessWidget {
                 cardWidth: 140,
                 title: "Now playing",
                 media: state.nowPlayingMovies,
+                onPressedAllMediaBtn: () {
+                  context.push(
+                    "${AppRoutes.home}/${AppRoutes.allMedia}",
+                    extra: ApiMediaQueryType.nowPlayingMovies.asString(),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               HomeCategoryList<PersonModel>(
@@ -96,6 +121,12 @@ class HomeBody extends StatelessWidget {
                 cardWidth: 140,
                 title: "Popular people",
                 media: state.popularPeople,
+                onPressedAllMediaBtn: () {
+                  context.push(
+                    "${AppRoutes.home}/${AppRoutes.allMedia}",
+                    extra: ApiMediaQueryType.popularActors.asString(),
+                  );
+                },
               ),
               const SizedBox(height: 10),
             ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:go_router/go_router.dart';
 import 'package:movies_app/domain/models/tmdb_models.dart';
 import 'package:movies_app/ui/widgets/custom_lists.dart';
 
@@ -10,12 +9,14 @@ class HomeCategoryList<T> extends StatelessWidget {
     required this.media,
     required this.cardWidth,
     required this.cardHeight,
+    required this.onPressedAllMediaBtn,
   });
 
   final String title;
   final List<T> media;
   final double cardWidth;
   final double cardHeight;
+  final void Function() onPressedAllMediaBtn;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +35,10 @@ class HomeCategoryList<T> extends StatelessWidget {
         series: media.cast<SeriesModel>(),
       );
     } else if (T == PersonModel) {
-      mediaList = PersonListView(
+      mediaList = ActorsListView(
         cardWidth: cardWidth,
         cardHeight: cardHeight,
-        persons: media.cast<PersonModel>(),
+        actors: media.cast<PersonModel>(),
       );
     }
 
@@ -52,13 +53,11 @@ class HomeCategoryList<T> extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
             TextButton(
-              onPressed: () {
-                // context.go("/all_movies");
-              },
+              onPressed: onPressedAllMediaBtn,
               child: const Text("All"),
             ),
           ],

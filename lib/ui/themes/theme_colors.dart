@@ -1,19 +1,36 @@
 part of "theme.dart";
 
 class ThemeColors extends ThemeExtension<ThemeColors> {
-  final Color filterButtonFillColor;
+  final Color themeButtonColor;
+  final Color searchAppBarColor;
+  final Color btmNvgBarIconColor;
+  final Color btmNvgBarActiveIconColor;
+  final Color btmNvgBarBackgrdColor;
 
   const ThemeColors({
-    required this.filterButtonFillColor,
+    required this.themeButtonColor,
+    required this.searchAppBarColor,
+    required this.btmNvgBarIconColor,
+    required this.btmNvgBarActiveIconColor,
+    required this.btmNvgBarBackgrdColor,
   });
 
   @override
   ThemeExtension<ThemeColors> copyWith({
-    Color? filterButtonFillColor,
+    Color? themeButtonColor,
+    Color? searchAppBarColor,
+    Color? btmNvgBarIconColor,
+    Color? btmNvgBarActiveIconColor,
+    Color? btmNvgBarBackgrdColor,
   }) {
     return ThemeColors(
-      filterButtonFillColor:
-          filterButtonFillColor ?? this.filterButtonFillColor,
+      themeButtonColor: themeButtonColor ?? this.themeButtonColor,
+      searchAppBarColor: searchAppBarColor ?? this.searchAppBarColor,
+      btmNvgBarIconColor: btmNvgBarIconColor ?? this.btmNvgBarIconColor,
+      btmNvgBarActiveIconColor:
+          btmNvgBarActiveIconColor ?? this.btmNvgBarActiveIconColor,
+      btmNvgBarBackgrdColor:
+          btmNvgBarBackgrdColor ?? this.btmNvgBarBackgrdColor,
     );
   }
 
@@ -27,16 +44,32 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     }
 
     return ThemeColors(
-      filterButtonFillColor:
-          Color.lerp(filterButtonFillColor, other.filterButtonFillColor, t)!,
+      themeButtonColor:
+          Color.lerp(themeButtonColor, other.themeButtonColor, t)!,
+      searchAppBarColor:
+          Color.lerp(searchAppBarColor, other.searchAppBarColor, t)!,
+      btmNvgBarIconColor:
+          Color.lerp(btmNvgBarIconColor, other.btmNvgBarIconColor, t)!,
+      btmNvgBarActiveIconColor: Color.lerp(
+          btmNvgBarActiveIconColor, other.btmNvgBarActiveIconColor, t)!,
+      btmNvgBarBackgrdColor:
+          Color.lerp(btmNvgBarBackgrdColor, other.btmNvgBarBackgrdColor, t)!,
     );
   }
 
   static get light => const ThemeColors(
-        filterButtonFillColor: AppColors.grey,
+        themeButtonColor: Color.fromARGB(255, 243, 106, 51),
+        searchAppBarColor: Color.fromARGB(255, 180, 180, 180),
+        btmNvgBarIconColor: Color.fromARGB(255, 55, 55, 55),
+        btmNvgBarActiveIconColor: AppColors.orange,
+        btmNvgBarBackgrdColor: Color.fromARGB(255, 229, 229, 229),
       );
 
   static get dark => const ThemeColors(
-        filterButtonFillColor: AppColors.white,
+        themeButtonColor: AppColors.orange,
+        searchAppBarColor: AppColors.darkerGrey,
+        btmNvgBarIconColor: AppColors.white,
+        btmNvgBarActiveIconColor: AppColors.orange,
+        btmNvgBarBackgrdColor: AppColors.darkestGrey,
       );
 }

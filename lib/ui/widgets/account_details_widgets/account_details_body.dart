@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/api_exceptions.dart';
-import 'package:movies_app/domain/models/tmdb_models.dart';
 import 'package:movies_app/ui/blocs/account_bloc/account_bloc.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
-import 'package:movies_app/ui/utils/image_formatter.dart';
-import 'package:movies_app/ui/widgets/account_details_widgets/account_settings.dart';
+import 'package:movies_app/ui/widgets/account_details_widgets/account_content.dart';
 import 'package:movies_app/ui/widgets/error_widget.dart';
 
 class AccountBody extends StatelessWidget {
@@ -84,53 +82,3 @@ class AccountBody extends StatelessWidget {
   }
 }
 
-class AccountContent extends StatelessWidget {
-  const AccountContent({
-    super.key,
-    required this.account,
-  });
-
-  final AccountModel account;
-
-  @override
-  Widget build(BuildContext context) {
-    Widget avatarWidget = ImageFormatter.formatAvatarImageWidget(
-      context,
-      imagePath: account.avatarPath,
-      diameter: 120,
-    );
-    return ListView(
-      padding: EdgeInsets.zero,
-      children: [
-        Container(
-          width: double.infinity,
-          height: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            // color: Theme.of(context).colorScheme.surface,
-          ),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                avatarWidget,
-                const SizedBox(height: 20),
-                Text(
-                  account.username ?? "Unknown username",
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 25, right: 25, bottom: 30),
-          child: AccountSettings(),
-        ),
-      ],
-    );
-  }
-}

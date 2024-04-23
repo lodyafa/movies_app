@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/api_clients/media_client.dart';
+import 'package:movies_app/ui/themes/theme.dart';
 
 class RootScreen extends StatelessWidget {
   const RootScreen({super.key, required this.navigationShell});
@@ -16,9 +17,12 @@ class RootScreen extends StatelessWidget {
         body: navigationShell,
         bottomNavigationBar: BottomNavigationBar(
           items: _buildBottomNavBarItems(context),
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
-          backgroundColor: Theme.of(context).colorScheme.surface,
+          selectedItemColor: Theme.of(context)
+              .extension<ThemeColors>()!
+              .btmNvgBarActiveIconColor,
+          unselectedItemColor:
+              Theme.of(context).extension<ThemeColors>()!.btmNvgBarIconColor,
+          backgroundColor: Theme.of(context).extension<ThemeColors>()!.btmNvgBarBackgrdColor,
           currentIndex: navigationShell.currentIndex,
           onTap: (index) => navigationShell.goBranch(
             index,
@@ -34,35 +38,44 @@ class RootScreen extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(
             Icons.home_outlined,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color:
+                Theme.of(context).extension<ThemeColors>()!.btmNvgBarIconColor,
           ),
           activeIcon: Icon(
             Icons.home,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context)
+                .extension<ThemeColors>()!
+                .btmNvgBarActiveIconColor,
           ),
           label: "Home",
         ),
         BottomNavigationBarItem(
           icon: Icon(
             Icons.search,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color:
+                Theme.of(context).extension<ThemeColors>()!.btmNvgBarIconColor,
           ),
           activeIcon: Icon(
             Icons.search,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context)
+                .extension<ThemeColors>()!
+                .btmNvgBarActiveIconColor,
           ),
           label: "Search",
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.bookmark_border,
-            color: Theme.of(context).colorScheme.onPrimary,
+            Icons.person_outline,
+            color:
+                Theme.of(context).extension<ThemeColors>()!.btmNvgBarIconColor,
           ),
           activeIcon: Icon(
-            Icons.bookmark,
-            color: Theme.of(context).colorScheme.primary,
+            Icons.person,
+            color: Theme.of(context)
+                .extension<ThemeColors>()!
+                .btmNvgBarActiveIconColor,
           ),
-          label: "Watch List",
+          label: "Account",
         ),
       ];
 }

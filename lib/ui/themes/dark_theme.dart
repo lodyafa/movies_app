@@ -19,9 +19,7 @@ ThemeData createDarkTheme() {
       onSurface: AppColors.white,
     ),
     extensions: <ThemeExtension<dynamic>>[
-      ThemeColors.light,
-      // ThemeTextStyles.light,
-      // ThemeGradients.light,
+      ThemeColors.dark,
     ],
     appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
   );

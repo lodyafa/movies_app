@@ -83,8 +83,8 @@ class SeriesDetailsLoadedBody extends StatelessWidget {
               SizedBox(
                 height: 256,
                 width: double.infinity,
-                child: PersonListView(
-                  persons: seriesActors,
+                child: ActorsListView(
+                  actors: seriesActors,
                   cardWidth: 140,
                   cardHeight: 210,
                 ),

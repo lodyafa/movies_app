@@ -6,13 +6,20 @@ import 'package:movies_app/data/api/api_clients/account_client.dart';
 import 'package:movies_app/data/api/api_clients/auth_client.dart';
 import 'package:movies_app/data/api/api_clients/session_data_client.dart';
 import 'package:movies_app/data/clients/connectivity_client.dart';
+import 'package:movies_app/data/storage/shared_prefs.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
+import 'package:movies_app/ui/blocs/theme_bloc/theme_bloc.dart';
 import 'package:movies_app/ui/cubits/connectivity_cubit/connectivity_cubit.dart';
 import 'package:movies_app/ui/routes/app_router.dart';
 import 'package:movies_app/ui/themes/theme.dart';
 
 class MoviesApp extends StatelessWidget {
-  const MoviesApp({super.key});
+  const MoviesApp({
+    super.key,
+    required this.storage,
+  });
+
+  final SharedPrefsStorage storage;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +45,11 @@ class MoviesApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
+            create: (context) => ThemeBloc(
+              storage: storage,
+            )..add(ThemeRestoreThemeEvent()),
+          ),
+          BlocProvider(
             create: (context) => ConnectivityCubit(
               connectivityClient:
                   RepositoryProvider.of<ConnectivityClient>(context),
@@ -52,11 +64,16 @@ class MoviesApp extends StatelessWidget {
             ),
           ),
         ],
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          darkTheme: createDarkTheme(),
-          themeMode: ThemeMode.dark,
-          routerConfig: AppRouter.router,
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              routerConfig: AppRouter.router,
+              theme: createLightTheme(),
+              darkTheme: createDarkTheme(),
+              themeMode: state.themeMode,
+            );
+          },
         ),
       ),
     );
