@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/api_exceptions.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
+import 'package:movies_app/ui/blocs/home_bloc/home_bloc.dart';
 import 'package:movies_app/ui/blocs/movie_details_bloc/movie_details_bloc.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
 import 'package:movies_app/ui/widgets/error_widget.dart';
@@ -48,7 +50,8 @@ class MovieDetailsBody extends StatelessWidget {
                 text: "Something went wrong...",
                 icon: Icons.error,
                 btnText: "Update",
-                onPressed: () {},
+                onPressed: () =>
+                    context.read<HomeBloc>().add(HomeAllMediaEvent()),
               );
           }
         }
@@ -60,10 +63,18 @@ class MovieDetailsBody extends StatelessWidget {
         }
 
         if (state is MovieDetailsLoadedState) {
-          return MovieDetailsLoadedBody(
-            movie: state.movieDetails,
-            movieActors: state.movieActors,
-            movies: state.similarMovies ?? [],
+          if (state.movieDetails.posterPath != null) {
+            return MovieDetailsLoadedBody(
+              movie: state.movieDetails,
+              movieActors: state.movieActors,
+              movies: state.similarMovies ?? [],
+            );
+          }
+          return Animate(
+            effects: const [ShakeEffect()],
+            child: const Center(
+              child: Text("Movie information not found..."),
+            ),
           );
         }
 

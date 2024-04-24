@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/api_exceptions.dart';
@@ -7,6 +8,8 @@ import 'package:movies_app/ui/blocs/person_details_bloc/person_details_bloc.dart
 import 'package:movies_app/ui/routes/app_routes.dart';
 import 'package:movies_app/ui/widgets/error_widget.dart';
 import 'package:movies_app/ui/widgets/person_details_widgets/person_details_loaded_body.dart';
+
+import '../../blocs/home_bloc/home_bloc.dart';
 
 class PersonDetailsBody extends StatelessWidget {
   const PersonDetailsBody({
@@ -48,7 +51,9 @@ class PersonDetailsBody extends StatelessWidget {
                 text: "Something went wrong...",
                 icon: Icons.error,
                 btnText: "Update",
-                onPressed: () {},
+                onPressed: () => context.read<HomeBloc>().add(
+                      HomeAllMediaEvent(),
+                    ),
               );
           }
         }
@@ -60,9 +65,18 @@ class PersonDetailsBody extends StatelessWidget {
         }
 
         if (state is PersonDetailsLoadedState) {
-          return PersonDetailsLoadedBody(
-            person: state.personDetails,
-          );
+          if (state.personDetails.birthday != null) {
+            return PersonDetailsLoadedBody(
+              person: state.personDetails,
+            );
+          } else {
+            return Animate(
+              effects: const [ShakeEffect()],
+              child: const Center(
+                child: Text("Information about the person was not found..."),
+              ),
+            );
+          }
         }
 
         return const Center(

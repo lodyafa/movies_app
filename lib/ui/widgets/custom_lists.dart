@@ -174,82 +174,87 @@ class SearchMediaList extends StatelessWidget {
       itemBuilder: (context, i) {
         final mediaModel = media[i];
         if (mediaModel is MovieModel) {
-          return MediaListTile(
-            posterPath: mediaModel.posterPath ??
-                "assets/images/unknown_media_image.webp",
-            title: mediaModel.title ?? "None",
-            voteAverage: mediaModel.voteAverage.toStringAsFixed(1),
-            releaseDate: mediaModel.releaseDate ?? "none",
-            origTitle: mediaModel.originalTitle.toString(),
-            onTap: () {
-              context.push(
-                "${AppRoutes.search}/${AppRoutes.movieDetails}/${mediaModel.id}",
-                extra: [mediaModel.id, mediaModel.title],
-              );
-            },
-          );
+            return MediaListTile(
+              posterPath: mediaModel.posterPath ??
+                  "assets/images/unknown_media_image.webp",
+              title: mediaModel.title ?? "None",
+              voteAverage: mediaModel.voteAverage.toStringAsFixed(1),
+              releaseDate: mediaModel.releaseDate ?? "none",
+              origTitle: mediaModel.originalTitle.toString(),
+              onTap: () {
+                context.push(
+                  "${AppRoutes.search}/${AppRoutes.movieDetails}/${mediaModel.id}",
+                  extra: [mediaModel.id, mediaModel.title],
+                );
+              },
+            );
         }
         if (mediaModel is SeriesModel) {
-          return MediaListTile(
-            posterPath: mediaModel.posterPath ??
-                "assets/images/unknown_media_image.webp",
-            title: mediaModel.name ?? "None",
-            voteAverage: mediaModel.voteAverage.toStringAsFixed(1),
-            releaseDate: mediaModel.firstAirDate ?? "none",
-            origTitle: mediaModel.originalName.toString(),
-            onTap: () {
-              context.push(
-                "${AppRoutes.search}/${AppRoutes.seriesDetails}/${mediaModel.id}",
-                extra: [mediaModel.id, mediaModel.name],
-              );
-            },
-          );
+          if (mediaModel.posterPath != null) {
+            return MediaListTile(
+              posterPath: mediaModel.posterPath ??
+                  "assets/images/unknown_media_image.webp",
+              title: mediaModel.name ?? "None",
+              voteAverage: mediaModel.voteAverage.toStringAsFixed(1),
+              releaseDate: mediaModel.firstAirDate ?? "none",
+              origTitle: mediaModel.originalName.toString(),
+              onTap: () {
+                context.push(
+                  "${AppRoutes.search}/${AppRoutes.seriesDetails}/${mediaModel.id}",
+                  extra: [mediaModel.id, mediaModel.name],
+                );
+              },
+            );
+          }
         }
         if (mediaModel is PersonModel) {
-          return ListTile(
-            contentPadding: const EdgeInsets.only(top: 10, left: 16, right: 16),
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: SizedBox(
-                    width: 100,
-                    height: 150,
-                    child: ImageFormatter.formatImageWidget(
-                      context,
-                      imagePath: mediaModel.profilePath,
-                      height: double.infinity,
-                      width: 140,
+          if (mediaModel.profilePath != null) {
+            return ListTile(
+              contentPadding:
+                  const EdgeInsets.only(top: 10, left: 16, right: 16),
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: SizedBox(
+                      width: 100,
+                      height: 150,
+                      child: ImageFormatter.formatImageWidget(
+                        context,
+                        imagePath: mediaModel.profilePath,
+                        height: double.infinity,
+                        width: 140,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        mediaModel.name ?? 'none',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground,
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          mediaModel.name ?? 'none',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 25,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            onTap: () {
-              context.push(
-                "${AppRoutes.search}/${AppRoutes.personDetails}/${mediaModel.id}",
-                extra: [mediaModel.id, mediaModel.name],
-              );
-            },
-          );
+                ],
+              ),
+              onTap: () {
+                context.push(
+                  "${AppRoutes.search}/${AppRoutes.personDetails}/${mediaModel.id}",
+                  extra: [mediaModel.id, mediaModel.name],
+                );
+              },
+            );
+          }
         }
         return null;
       },

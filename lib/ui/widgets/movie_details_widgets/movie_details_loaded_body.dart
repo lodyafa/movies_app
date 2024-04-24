@@ -20,8 +20,10 @@ class MovieDetailsLoadedBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    movies.removeWhere((element) => element.posterPath == null);
+    movieActors.removeWhere((element) => element.profilePath == null);
     return Animate(
-       effects: const [FadeEffect()],
+      effects: const [FadeEffect()],
       child: ListView(
         padding: const EdgeInsets.all(0),
         children: [
@@ -43,7 +45,7 @@ class MovieDetailsLoadedBody extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 160, right: 25),
                         child: MovieDetailsTitle(
-                          movieTitle: movie.title,
+                          movieTitle: movie.title ?? "None",
                         ),
                       ),
                     ),
@@ -87,7 +89,7 @@ class MovieDetailsLoadedBody extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -105,7 +107,7 @@ class MovieDetailsLoadedBody extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
                 const SizedBox(height: 10),

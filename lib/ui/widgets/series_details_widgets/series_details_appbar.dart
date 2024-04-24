@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SeriesDetailsAppBar extends StatelessWidget
@@ -22,13 +21,6 @@ class SeriesDetailsAppBar extends StatelessWidget
         },
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.bookmark_border_outlined),
-          color: Theme.of(context).colorScheme.onPrimary,
-        ),
-      ],
     );
   }
 

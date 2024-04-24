@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/data/api/api_exceptions.dart';
 import 'package:movies_app/ui/blocs/auth_bloc/auth_bloc.dart';
+import 'package:movies_app/ui/blocs/home_bloc/home_bloc.dart';
 import 'package:movies_app/ui/blocs/series_details_bloc/series_details_bloc.dart';
 import 'package:movies_app/ui/routes/app_routes.dart';
 import 'package:movies_app/ui/widgets/error_widget.dart';
@@ -48,7 +50,9 @@ class SeriesDetailsBody extends StatelessWidget {
                 text: "Something went wrong...",
                 icon: Icons.error,
                 btnText: "Update",
-                onPressed: () {},
+                onPressed: () => context.read<HomeBloc>().add(
+                      HomeAllMediaEvent(),
+                    ),
               );
           }
         }
@@ -60,11 +64,20 @@ class SeriesDetailsBody extends StatelessWidget {
         }
 
         if (state is SeriesDetailsLoadedState) {
-          return SeriesDetailsLoadedBody(
-            series: state.seriesDetails,
-            seriesActors: state.seriesActors,
-            seriesList: state.similarSeries ?? [],
-          );
+          if (state.seriesDetails.posterPath != null) {
+            return SeriesDetailsLoadedBody(
+              series: state.seriesDetails,
+              seriesActors: state.seriesActors,
+              seriesList: state.similarSeries ?? [],
+            );
+          } else {
+            return Animate(
+              effects: const [ShakeEffect()],
+              child: const Center(
+                child: Text("Information about the series was not found..."),
+              ),
+            );
+          }
         }
 
         return const Center(

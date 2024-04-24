@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/ui/blocs/all_media_bloc/all_media_bloc.dart';
+import 'package:movies_app/ui/blocs/home_bloc/home_bloc.dart';
 import 'package:movies_app/ui/widgets/all_media_widgets/all_media_loaded_body.dart';
+import 'package:movies_app/ui/widgets/error_widget.dart';
 
 class AllMediaBody extends StatelessWidget {
   const AllMediaBody({
@@ -17,8 +19,12 @@ class AllMediaBody extends StatelessWidget {
       builder: (context, state) {
         switch (state.status) {
           case AllMediaStatus.failure:
-            return const Center(
-              child: Text("Error"),
+            return CustomErrorWidget(
+              text: "Something went wrong...",
+              icon: Icons.error,
+              btnText: "Update",
+              onPressed: () =>
+                  context.read<HomeBloc>().add(HomeAllMediaEvent()),
             );
           case AllMediaStatus.success:
             final screenWidth = MediaQuery.of(context).size.width;

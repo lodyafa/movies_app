@@ -13,7 +13,7 @@ class MovieDetailsAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      centerTitle: true,
+      centerTitle: false,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -21,13 +21,6 @@ class MovieDetailsAppBar extends StatelessWidget
         },
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.bookmark_border_outlined),
-          color: Theme.of(context).colorScheme.onPrimary,
-        ),
-      ],
     );
   }
 
